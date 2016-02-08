@@ -10,7 +10,8 @@ namespace The_RPG_thread_game.Farm_Semphore_
 {
     public class ResourceManager
     {
-        public int Meat;
+        public int Meat = 100;
+        public int Gold = 500;
 
         private static ResourceManager MyInstance;
         private static readonly object SyncLock = new object();

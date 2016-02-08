@@ -11,10 +11,8 @@ namespace The_RPG_thread_game
     {
         protected Vector2 StartPos;
         
-        protected GameObject(Vector2 startPos)
-        {
-            StartPos = startPos;
-        }
+
+        protected 
 
         public virtual void Update(float deltaTime)
         {
