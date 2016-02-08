@@ -11,7 +11,7 @@ namespace The_RPG_thread_game.Farm_Semphore_
     {
         public int StartFarmerCount = 5;
         public int MaxFarmerCount = 5;
-        public int ResourcePerFarmer = 5;
+        public int MeatPerFarmer = 5;
 
         public int FarmingTimeInMilliSecounds = 1;
 
@@ -26,7 +26,7 @@ namespace The_RPG_thread_game.Farm_Semphore_
         {
             SemaphoreLock.WaitOne(-1);
             Thread.Sleep(FarmingTimeInMilliSecounds);
-            FarmResourceManager.Instance.Resource += ResourcePerFarmer;
+            ResourceManager.Instance.Meat += MeatPerFarmer;
             SemaphoreLock.Release();
         }
 

@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace The_RPG_thread_game.Farm_Semphore_
 {
-    public class FarmResourceManager
+    public class ResourceManager
     {
-        public int Resource;
+        public int Meat;
 
-        private static FarmResourceManager MyInstance;
+        private static ResourceManager MyInstance;
         private static readonly object SyncLock = new object();
 
-        public static FarmResourceManager Instance
+        public static ResourceManager Instance
         {
             get
             {
@@ -23,7 +23,7 @@ namespace The_RPG_thread_game.Farm_Semphore_
                 {
                     if (MyInstance == null)
                     {
-                        MyInstance = new FarmResourceManager();
+                        MyInstance = new ResourceManager();
                     }
                     return MyInstance;
                 }
@@ -31,7 +31,7 @@ namespace The_RPG_thread_game.Farm_Semphore_
         }
 
         // Private constructor, so that other classes can't create a FarmResourceManager.
-        private FarmResourceManager(){}
+        private ResourceManager(){}
 
 
        

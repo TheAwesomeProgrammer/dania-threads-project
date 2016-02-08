@@ -9,7 +9,6 @@ namespace Testing
     [TestClass]
     public class TestFarm
     {
-        private int TestTimerID = 5;
         private int WaitingFarmers = 13;
 
         private Action<Thread> StartNJoinThread = thread =>
@@ -23,19 +22,19 @@ namespace Testing
         public void TestEnteringOfFarm()
         {
             Farm Farm = new Farm();
-            FarmResourceManager.Instance.Resource = 0;
+            ResourceManager.Instance.Meat = 0;
             Thread Thread = new Thread(() => FarmThread(Farm));
 
             StartNJoinThread(Thread);
 
-            Assert.AreEqual(FarmResourceManager.Instance.Resource, Farm.ResourcePerFarmer);
+            Assert.AreEqual(ResourceManager.Instance.Meat, Farm.MeatPerFarmer);
         }
 
         [TestMethod]
         public void TestSemaphoreWaitingWithXAntalFarmers()
         {
             Farm Farm = new Farm();
-            FarmResourceManager.Instance.Resource = 0;
+            ResourceManager.Instance.Meat = 0;
             Thread[] Threads = new Thread[Farm.MaxFarmerCount + WaitingFarmers];
             
 
@@ -44,7 +43,7 @@ namespace Testing
                 StartNJoinThread(new Thread(() => FarmThread(Farm)));
             }
 
-            Assert.AreEqual(FarmResourceManager.Instance.Resource,Threads.Length * Farm.ResourcePerFarmer);
+            Assert.AreEqual(ResourceManager.Instance.Meat,Threads.Length * Farm.MeatPerFarmer);
         }
 
         private void FarmThread(Farm farm)
