@@ -52,8 +52,40 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="GameObjectClasses\Ally\Ally.cs" />
+    <Compile Include="GameObjectClasses\Ally\Structure\Barracks\Barracks.cs" />
+    <Compile Include="GameObjectClasses\Ally\Structure\Farm\Farm.cs" />
+    <Compile Include="GameObjectClasses\Ally\Structure\Goldmine\Goldmine.cs" />
+    <Compile Include="GameObjectClasses\Ally\Structure\Structure.cs" />
+    <Compile Include="GameObjectClasses\Ally\Structure\Townhall\Townhall.cs" />
+    <Compile Include="GameObjectClasses\Ally\Structure\Turret\Cannon\Cannon.cs" />
+    <Compile Include="GameObjectClasses\Ally\Structure\Turret\LightningLauncher\LightningLauncher.cs" />
+    <Compile Include="GameObjectClasses\Ally\Structure\Turret\Turret.cs" />
+    <Compile Include="GameObjectClasses\Ally\Unit\Infantry\Archer\Archer.cs" />
+    <Compile Include="GameObjectClasses\Ally\Unit\Infantry\Infantry.cs" />
+    <Compile Include="GameObjectClasses\Ally\Unit\Infantry\Swordsman\Swordsman.cs" />
+    <Compile Include="GameObjectClasses\Ally\Unit\Unit.cs" />
+    <Compile Include="GameObjectClasses\Ally\Unit\Worker\Farmer\Farmer.cs" />
+    <Compile Include="GameObjectClasses\Ally\Unit\Worker\Miner\Miner.cs" />
+    <Compile Include="GameObjectClasses\Ally\Unit\Worker\Worker.cs" />
+    <Compile Include="GameObjectClasses\Enemy\EnemyArcher\EnemyArcher.cs" />
+    <Compile Include="GameObjectClasses\Enemy\Enemy.cs" />
+    <Compile Include="GameObjectClasses\Enemy\EnemyWarrior\EnemyWarrior.cs" />
+    <Compile Include="GameObjectClasses\GameObject.cs" />
+    <Compile Include="OtherClasses\GameWorld.cs" />
+    <Compile Include="OtherClasses\Keyboard.cs" />
+    <Compile Include="OtherClasses\MainMenu.cs" />
+    <Compile Include="OtherClasses\Mouse.cs" />
+    <Compile Include="OtherClasses\UI\About\AboutButton.cs" />
+    <Compile Include="OtherClasses\UI\PlayGameButton\PlayGameButton.cs" />
+    <Compile Include="OtherClasses\UI\UIButton.cs" />
+    <Compile Include="OtherClasses\UI\UIText.cs" />
+    <Compile Include="OtherClasses\Vector2.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -76,6 +108,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\apple.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
