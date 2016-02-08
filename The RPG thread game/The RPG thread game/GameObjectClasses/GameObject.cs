@@ -7,26 +7,20 @@ using System.Threading.Tasks;
 
 namespace The_RPG_thread_game
 {
-    internal abstract class GameObject
+    public abstract class GameObject
     {
-        protected string ImagePath { get; set; }
-        protected Vector2 StartPos { get; set; }
-        protected int Health { get; set; }
+        protected Vector2 StartPos;
+        
+        protected GameObject(Vector2 startPos)
+        {
+            StartPos = startPos;
+        }
 
-        //string imagePath, Vector2 startPos, int health
-        protected GameObject()
+        public virtual void Update(float deltaTime)
         {
         }
 
-        public virtual void Draw(Graphics dc)
-        {
-        }
-
-        public virtual void Update(float fps)
-        {
-        }
-
-        public virtual void UpdateAnimation(float fps)
+        public virtual void UpdateAnimation(float deltaTime)
         {
         }
 
@@ -37,7 +31,6 @@ namespace The_RPG_thread_game
         //        return;
         //    }
         //}
-
-        public abstract void OnPredictedCollision();
+        
     }
 }

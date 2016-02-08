@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace The_RPG_thread_game
 {
-    internal abstract class Enemy : GameObject
+    public abstract class Enemy : AliveGameObject
     {
+        public Enemy(Vector2 startPos,int health) :
+            base(startPos, health)
+        {
+            
+        }
+
     }
 }

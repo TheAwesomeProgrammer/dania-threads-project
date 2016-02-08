@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using The_RPG_thread_game.OtherClasses;
 
 namespace The_RPG_thread_game
 {

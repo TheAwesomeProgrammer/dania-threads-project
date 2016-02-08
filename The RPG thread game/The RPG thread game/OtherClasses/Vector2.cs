@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace The_RPG_thread_game
 {
-    internal class Vector2
+    public class Vector2
     {
         private float x;
         private float y;
@@ -29,6 +25,15 @@ namespace The_RPG_thread_game
             set { y = value; }
         }
 
+        public Vector2 Normalized
+        {
+            get
+            {
+                float length = Length();
+                return new Vector2(x / length, y / length);
+            }
+        }
+
         public Vector2 Substract(Vector2 vec)
         {
             Vector2 newVec = new Vector2(x, y);
@@ -37,6 +42,28 @@ namespace The_RPG_thread_game
 
             return newVec;
         }
+
+        public float DistanceToVector(Vector2 vector)
+        {
+            Vector2 VectorsSubtracted = vector.Substract(this);
+            return (float)Math.Sqrt(Math.Pow(VectorsSubtracted.x, 2) + Math.Pow(VectorsSubtracted.y, 2));
+        }
+
+        public static Vector2 operator *(Vector2 vector1, Vector2 vector2)
+        {
+            return new Vector2(vector1.x * vector2.x,vector1.y * vector2.y);
+        }
+
+        public static Vector2 operator *(Vector2 vector1, float value)
+        {
+            return new Vector2(vector1.x * value, vector1.y * value);
+        }
+
+        public static Vector2 operator +(Vector2 vector1, Vector2 vector2)
+        {
+            return new Vector2(vector1.x + vector2.x, vector1.y + vector2.y);
+        }
+
 
         private float Length()
         {
