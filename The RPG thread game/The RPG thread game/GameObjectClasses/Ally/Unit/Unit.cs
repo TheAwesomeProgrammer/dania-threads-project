@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace The_RPG_thread_game
 {
-    internal abstract class Unit : Ally
+    public abstract class Unit : Ally
     {
+        public Unit(Vector2 startPos, string imagePath, float scaleFactor) :
+            base(startPos, imagePath, scaleFactor)
+        {
+        }
+
     }
 }

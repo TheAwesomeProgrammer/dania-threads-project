@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-using The_RPG_thread_game.OtherClasses;
+using The_RPG_thread_game;
 
 namespace The_RPG_thread_game
 {
@@ -16,7 +17,6 @@ namespace The_RPG_thread_game
         public List<UIButton> uiToDraw;
         public List<UIButton> uiToAdd;
         public List<UIButton> uiToRemove;
-        public List<UIText>
         public Rectangle Display { get; set; }
         public bool inMenu;
 

@@ -8,9 +8,10 @@ namespace The_RPG_thread_game
 {
     internal class Archer : Infantry
     {
-        public override void OnPredictedCollision()
+        public Archer(Vector2 startPos, string imagePath, float scaleFactor) : 
+            base(startPos,imagePath,scaleFactor)
         {
-            throw new NotImplementedException();
+
         }
     }
 }

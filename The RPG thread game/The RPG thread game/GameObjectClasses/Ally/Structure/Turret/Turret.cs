@@ -8,5 +8,10 @@ namespace The_RPG_thread_game
 {
     internal abstract class Turret : Structure
     {
+        public Turret(Vector2 startPos, string imagePath, float scaleFactor) : 
+            base(startPos,imagePath,scaleFactor)
+        {
+
+        }
     }
 }

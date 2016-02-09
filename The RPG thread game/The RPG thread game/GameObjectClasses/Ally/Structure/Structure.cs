@@ -6,7 +6,20 @@ using System.Threading.Tasks;
 
 namespace The_RPG_thread_game
 {
-    internal abstract class Structure : Ally
+    public abstract class Structure : Ally
     {
+        public bool HasEntered;
+
+        public Structure(Vector2 startPos, string imagePath, float scaleFactor) : 
+            base(startPos,imagePath,scaleFactor)
+        {
+            
+        }
+
+        public void Enter()
+        {
+            HasEntered = true;
+        }
+
     }
 }

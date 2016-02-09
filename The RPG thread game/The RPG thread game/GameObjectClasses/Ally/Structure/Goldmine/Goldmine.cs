@@ -8,9 +8,10 @@ namespace The_RPG_thread_game
 {
     internal class Goldmine : Structure
     {
-        public override void OnPredictedCollision()
+        public Goldmine(Vector2 startPos, string imagePath, float scaleFactor) :
+            base(startPos, imagePath, scaleFactor)
         {
-            throw new NotImplementedException();
+
         }
     }
 }

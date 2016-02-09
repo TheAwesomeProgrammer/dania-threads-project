@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace The_RPG_thread_game.Utillity
 {
@@ -22,6 +23,12 @@ namespace The_RPG_thread_game.Utillity
             {
                 action(Item);
             }
+        }
+
+        public static void StartAndRunInFront(this Thread thread)
+        {
+            thread.Start();
+            thread.IsBackground = false;
         }
 
         public static void DoActionOnItemsMatchingPredicate<T>(this List<T> list, Func<T, bool> predicate, Action<T> action)

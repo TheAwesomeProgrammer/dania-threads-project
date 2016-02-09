@@ -5,7 +5,7 @@ namespace The_RPG_thread_game.Utillity
     public class WaypointFollow
     {
         private DateTimeTimer Timer = DateTimeTimer.Instance;
-        private float ReachedTargetThreeshold = 10;
+        private float ReachedTargetThreeshold = 5;
 
         private float PixelsPerSecound;
         private Vector2 TargetPoint;
@@ -29,9 +29,9 @@ namespace The_RPG_thread_game.Utillity
             return StartPoint + (GetDiretionToTarget() * PixelsPerSecound * TimeGoneInMilliSecounds);
         }
 
-        public bool HasReachedTarget()
+        public bool HasReachedTarget(Vector2 currentPosition)
         {
-            return StartPoint.DistanceToVector(TargetPoint) < ReachedTargetThreeshold;
+            return currentPosition.DistanceToVector(TargetPoint) < ReachedTargetThreeshold;
         }
 
         private Vector2 GetDiretionToTarget()

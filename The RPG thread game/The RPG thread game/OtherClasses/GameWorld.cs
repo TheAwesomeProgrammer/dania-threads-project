@@ -10,10 +10,11 @@ namespace The_RPG_thread_game
 {
     internal class GameWorld
     {
-        public List<GameObject> Objects { get; set; } = new List<GameObject>();
-        public List<GameObject> ObjectsToAdd { get; set; } = new List<GameObject>();
-        public List<GameObject> ObjectsToRemove = new List<GameObject>();
+        public static List<GameObject> Objects = new List<GameObject>();
+        public static List<CollidingSprite> CollidingSprites = new List<CollidingSprite>();
 
+        private List<GameObject> ObjectsToAdd = new List<GameObject>();
+        private static List<GameObject> ObjectsToRemove = new List<GameObject>();
         private DateTimeTimer Timer;
         private Graphics Graphics;
         private Rectangle DisplayRectangle;
@@ -47,7 +48,7 @@ namespace The_RPG_thread_game
                 gameObject => (gameObject as Sprite).Draw(graphics));
         }
 
-        public void RemoveObjectInNextCycle(GameObject objectToRemove)
+        public static void RemoveObjectInNextCycle(GameObject objectToRemove)
         {
             ObjectsToRemove.Add(objectToRemove);
         }
@@ -65,7 +66,14 @@ namespace The_RPG_thread_game
 
         public void AddObjects()
         {
-            Objects.AddAll(Object => ObjectsToAdd.Contains(Object));
+            Func<GameObject, bool> NonCollidingPredicate = Object => ObjectsToAdd.Contains(Object) && !(Object is CollidingSprite);
+            Func<GameObject, bool> CollidingPredicate = Object => ObjectsToAdd.Contains(Object) && Object is CollidingSprite;
+
+            Objects.DoActionOnItemsMatchingPredicate(NonCollidingPredicate,
+                item => Objects.Add(item));
+            CollidingSprites.DoActionOnItemsMatchingPredicate(CollidingPredicate,
+                item => CollidingSprites.Add(item as CollidingSprite));
+
             ObjectsToAdd.Clear();
         }
     }

@@ -8,5 +8,10 @@ namespace The_RPG_thread_game
 {
     internal abstract class Infantry : Unit
     {
+        public Infantry(Vector2 startPos, string imagePath, float scaleFactor) : 
+            base(startPos,imagePath,scaleFactor)
+        {
+
+        }
     }
 }

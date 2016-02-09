@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 using The_RPG_thread_game.Farm_Semphore_;
+using The_RPG_thread_game.Utillity;
 
 namespace The_RPG_thread_game
 {
@@ -23,13 +24,18 @@ namespace The_RPG_thread_game
         
         public bool TryingToUpgradeTownHall;
         public bool TryingToUseGoldElsewere;
-        Thread TownHallUpgradeThread;
+        private Thread TownHallUpgradeThread;
+        private static Thread GameLoopThread;
         private Graphics dc;
         private MainMenu mainMenu;
+        private GameWorld GameWorld;
+        private static ThreadManager ThreadManager;
+      
 
         public Form1()
         {            
             InitializeComponent();
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -39,10 +45,19 @@ namespace The_RPG_thread_game
 
             townHall = new TownHall(this);
             mainMenu = new MainMenu(dc, DisplayRectangle);
+            GameWorld = new GameWorld(dc,DisplayRectangle);
+            ThreadManager = ThreadManager.Instance;
             Thread MainMenuThread = new Thread(() => mainMenu.MenuLogic());
-            MainMenuThread.Start();
-            MainMenuThread.IsBackground = false;
+            GameLoopThread = new Thread(() => GameWorld.GameLoop());
+            ThreadManager.SetMainThread(MainMenuThread);
         }
+
+        public static void StartGameLoop()
+        {
+            ThreadManager.SetMainThread(GameLoopThread); 
+        }
+
+        
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {

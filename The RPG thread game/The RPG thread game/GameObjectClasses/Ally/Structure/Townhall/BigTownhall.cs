@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace The_RPG_thread_game
 {
-    internal class Townhall : Structure
+    public class BigTownhall : Structure
     {
-        public override void OnPredictedCollision()
+        public BigTownhall(Vector2 startPos, string imagePath, float scaleFactor) :
+                base(startPos, imagePath, scaleFactor)
         {
-            throw new NotImplementedException();
+
         }
     }
 }

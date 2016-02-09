@@ -9,10 +9,16 @@ namespace The_RPG_thread_game
 {
     public abstract class GameObject
     {
-        protected Vector2 StartPos;
-        
+        public Vector2 Position;
 
-        protected 
+        protected Vector2 StartPos;
+
+
+        public GameObject(Vector2 startPos)
+        {
+            StartPos = startPos;
+            Position = startPos;
+        }
 
         public virtual void Update(float deltaTime)
         {
@@ -22,13 +28,11 @@ namespace The_RPG_thread_game
         {
         }
 
-        //public RectangleF CollisionBox
-        //{
-        //    get
-        //    {
-        //        return;
-        //    }
-        //}
-        
+        public virtual void Die()
+        {
+            GameWorld.RemoveObjectInNextCycle(this);
+        }
+
+
     }
 }

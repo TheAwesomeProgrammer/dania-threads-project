@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace The_RPG_thread_game
 {
-    public abstract class Enemy : AliveGameObject
+    public abstract class Enemy : NonCollidingSprite
     {
-        public Enemy(Vector2 startPos,int health) :
-            base(startPos, health)
+        public Enemy(Vector2 startPos, string imagePath, float scaleFactor) :
+            base(startPos, imagePath, scaleFactor)
         {
-            
+
         }
 
     }

@@ -8,9 +8,9 @@ namespace The_RPG_thread_game
 {
     internal class Cannon : Turret
     {
-        public override void OnPredictedCollision()
+        public Cannon(Vector2 startPos, string imagePath, float scaleFactor) :
+            base(startPos, imagePath, scaleFactor)
         {
-            throw new NotImplementedException();
         }
     }
 }

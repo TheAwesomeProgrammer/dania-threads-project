@@ -8,9 +8,9 @@ namespace The_RPG_thread_game
 {
     internal class Miner : Worker
     {
-        public override void OnPredictedCollision()
+        public Miner(Vector2 startPos, string imagePath, float scaleFactor, Structure startStructure,Structure endStructure) :
+                base(startPos, imagePath, scaleFactor, startStructure, endStructure)
         {
-            throw new NotImplementedException();
         }
     }
 }
