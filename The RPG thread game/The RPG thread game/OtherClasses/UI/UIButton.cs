@@ -15,18 +15,20 @@ namespace The_RPG_thread_game
         public Color TextColor { get; set; }
         public Color OnHoverColor { get; set; }
         public Vector2 TextPosition { get; set; }
-        
+
         protected string ButtonText { get; set; }
         protected FontFamily Font { get; set; }
         protected int FontSize { get; set; }
+        protected string UIText;
+        protected UIText Text;
 
         private bool IsHovered;
         private bool HasClicked;
 
-        protected UIButton(Vector2 position, SizeF sizeF, object mainMenuSender) : 
-            base(position,sizeF)
+        protected UIButton(Vector2 position, SizeF sizeF, object sender) :
+            base(position, sizeF)
         {
-            Sender = mainMenuSender as MainMenu;
+            Sender = sender as MainMenu;
             Font = FontFamily.GenericSansSerif;
             OnHoverColor = Color.White;
             IsHovered = false;
@@ -87,7 +89,6 @@ namespace The_RPG_thread_game
             TextColor = OnHoverColor;
         }
 
-
         public void OnHover()
         {
             IsHovered = true;
@@ -102,7 +103,6 @@ namespace The_RPG_thread_game
 
         public override void OnCollision(List<CollideableSprite> spritesCollidingWith)
         {
-            
         }
     }
 }

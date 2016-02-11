@@ -5,17 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using The_RPG_thread_game;
+using System.Windows.Forms;
 
 namespace The_RPG_thread_game
 {
     internal class PlayGameButton : UIButton
     {
-        private Graphics dc;
-        private GameWorld gw;
-
-        public PlayGameButton(Vector2 position, SizeF sizeF, MainMenu mainMenuSender) : 
-            base(position, sizeF, mainMenuSender)
+        public PlayGameButton(Vector2 position, SizeF sizeF, MainMenu Sender) :
+            base(position, sizeF, Sender)
         {
             ButtonText = "Play Game";
             FontSize = 16;

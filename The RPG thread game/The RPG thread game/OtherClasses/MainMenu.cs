@@ -5,48 +5,53 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using The_RPG_thread_game;
-using The_RPG_thread_game.Utillity;
 
 namespace The_RPG_thread_game
 {
     public class MainMenu
     {
+        public Graphics dc;
+        public Thread GameWorldThread;
+        public Thread NewMainMenuThread;
+        private BufferedGraphics backBuffer;
+        private Image bgImage;
         public List<UIButton> uiToDraw;
         public List<UIButton> uiToAdd;
         public List<UIButton> uiToRemove;
+        public List<UIText> uiTextToWrite;
+        public List<UIText> uiTextToAdd;
+        public List<UIText> uiTextToRemove;
         public Rectangle Display { get; set; }
         public bool inMenu;
 
-        private Graphics Graphics;
-        private Image bgImage;
         private int ThreadId;
-        private Render Render;
-       
 
         public MainMenu(Graphics dc, Rectangle display)
         {
-            Render = new Render(dc,display);
-            Graphics = Render.Graphics;
+            backBuffer = BufferedGraphicsManager.Current.Allocate(dc, display);
+            this.dc = backBuffer.Graphics;
             Display = display;
             uiToDraw = new List<UIButton>();
             uiToAdd = new List<UIButton>();
             uiToRemove = new List<UIButton>();
-            inMenu = true;
-            bgImage = Image.FromFile(@"Resources/apple.png");
+            uiTextToWrite = new List<UIText>();
+            uiTextToAdd = new List<UIText>();
+            uiTextToRemove = new List<UIText>();
+            bgImage = Image.FromFile(@"Resources/bgImage2.PNG");
         }
 
         public void MenuLogic(int threadId)
         {
             ThreadId = threadId;
-            uiToAdd.Add((new PlayGameButton(new Vector2(500, 150), new SizeF(250,50), this)));
-            uiToAdd.Add((new AboutButton(new Vector2(500, 220), new SizeF(250,50), this)));
-
+            uiToAdd.Add((new PlayGameButton(new Vector2(500, 150), new SizeF(250, 50), this)));
+            uiToAdd.Add((new AboutButton(new Vector2(500, 220), new SizeF(250, 50), this)));
+            uiToAdd.Add((new CreditButton(new Vector2(500, 290), new SizeF(250, 50), this)));
+            uiToAdd.Add((new ExitButton(new Vector2(500, 360), new SizeF(250, 50), this)));
             while (ThreadManager.Instance.DoesThreadExist(threadId))
             {
                 UIFunction();
-                MouseActions();
                 DrawUI();
+                MouseActions();
             }
         }
 
@@ -58,9 +63,14 @@ namespace The_RPG_thread_game
         private void UIFunction()
         {
             uiToDraw.AddRange(uiToAdd);
+            uiTextToWrite.AddRange(uiTextToAdd);
             foreach (UIButton UIB in uiToRemove)
             {
                 uiToDraw.Remove(UIB);
+            }
+            foreach (UIText UIT in uiTextToRemove)
+            {
+                uiTextToWrite.Remove(UIT);
             }
             ClearUILists();
         }
@@ -69,6 +79,8 @@ namespace The_RPG_thread_game
         {
             uiToAdd.Clear();
             uiToRemove.Clear();
+            uiTextToAdd.Clear();
+            uiTextToRemove.Clear();
         }
 
         private void MouseActions()
@@ -77,7 +89,7 @@ namespace The_RPG_thread_game
             {
                 Vector2 MousePosition = Mouse.Position;
 
-                if (MousePosition.Y > UIB.Position.Y && MousePosition.Y< (UIB.Position.Y + UIB.SizeF.Height) &&
+                if (MousePosition.Y > UIB.Position.Y && MousePosition.Y < (UIB.Position.Y + UIB.SizeF.Height) &&
                    MousePosition.X > UIB.Position.X && MousePosition.X < (UIB.Position.X + UIB.SizeF.Width))
                 {
                     if (Mouse.IsMouseDown)
@@ -98,15 +110,20 @@ namespace The_RPG_thread_game
 
         private void DrawUI()
         {
-            Render.Clear();
-            Graphics.DrawImage(bgImage, new Rectangle(0, 0, 1280, 720));
+            dc.Clear(Color.White);
+            dc.DrawImage(bgImage, new Rectangle(0, 0, 1280, 720));
 
             foreach (UIButton UIB in uiToDraw)
             {
-                UIB.Update(0);
-                UIB.Draw(Graphics);
+                UIB.Draw(dc);
             }
-            Render.RenderBackBuffer();
+
+            foreach (UIText UIT in uiTextToWrite)
+            {
+                UIT.Draw(dc);
+            }
+
+            backBuffer.Render();
         }
     }
 }

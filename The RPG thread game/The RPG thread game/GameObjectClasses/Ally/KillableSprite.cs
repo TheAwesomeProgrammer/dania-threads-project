@@ -12,7 +12,7 @@
         }
 
         public KillableSprite(Vector2 startPos, Team team) :
-            base(startPos,team)
+            base(startPos, team)
         {
             LifeObject = new LifeObject(this, HealthBarOffset);
         }
@@ -22,6 +22,5 @@
             base.Update(deltaTime);
             LifeObject.Update(deltaTime);
         }
-
     }
 }

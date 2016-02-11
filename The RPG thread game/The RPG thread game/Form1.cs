@@ -9,18 +9,20 @@ using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading;
+
+using System.Threading;
+
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Threading;
 using The_RPG_thread_game.Farm_Semphore_;
 using The_RPG_thread_game.Utillity;
 
 namespace The_RPG_thread_game
 {
     public partial class Form1 : Form
-    {      
-        TownHall townHall;
-        static object resourcesLock = new object();
+    {
+        private TownHall townHall;
+        private static object resourcesLock = new object();
 
         public bool TryingToBuildWOrker;
         public bool TryingToUpgradeTownHall;
@@ -39,18 +41,15 @@ namespace The_RPG_thread_game
 
         private Thread TownHallUpgradeThread;
         private static Thread GameLoopThread;
-       
+
         private Graphics dc;
         private MainMenu mainMenu;
         private GameWorld GameWorld;
         private static ThreadManager ThreadManager;
 
-      
-
         public Form1()
-        {            
+        {
             InitializeComponent();
-            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -60,11 +59,11 @@ namespace The_RPG_thread_game
 
             townHall = new TownHall(this);
             mainMenu = new MainMenu(dc, DisplayRectangle);
-            GameWorld = new GameWorld(dc,DisplayRectangle);
+            GameWorld = new GameWorld(dc, DisplayRectangle);
             GameLoopThread = new Thread(() => GameWorld.GameLoop(GameLoopThreadId));
             ThreadManager = ThreadManager.Instance;
             Thread MainMenuThread = new Thread(() => mainMenu.MenuLogic(MainMenuThreadId));
-            ThreadManager.AddThread(MainMenuThread,MainMenuThreadId,ThreadPriority.Highest);
+            ThreadManager.AddThread(MainMenuThread, MainMenuThreadId, ThreadPriority.Highest);
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -75,10 +74,8 @@ namespace The_RPG_thread_game
 
         public static void StartGameLoop()
         {
-            ThreadManager.AddThread(GameLoopThread, GameLoopThreadId, ThreadPriority.Highest); 
+            ThreadManager.AddThread(GameLoopThread, GameLoopThreadId, ThreadPriority.Highest);
         }
-
-        
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
@@ -118,10 +115,10 @@ namespace The_RPG_thread_game
             dc.DrawString(townHall.UpgradeGoldPrice + "$", f, b, 530, 200);
             dc.DrawString(townHall.UpgradeFoodPrice + "Food", f, b, 530, 220);
             dc.DrawString(townHall.UpgradeProgess + "%", f, b, 600, 200);
-            dc.DrawString(Gold+ ResourceManager.Instance.Gold, f, w, 100, 20);
-            dc.DrawString(Food+ ResourceManager.Instance.Meat, f, w, 150, 20);
+            dc.DrawString(Gold + ResourceManager.Instance.Gold, f, w, 100, 20);
+            dc.DrawString(Food + ResourceManager.Instance.Meat, f, w, 150, 20);
         }
-   
+
         private void button1_Click(object sender, EventArgs e)
         {
             TownHallUpgradeThread = new Thread(townHall.UpgradingTownHall);
@@ -134,9 +131,8 @@ namespace The_RPG_thread_game
             lock (resourcesLock)
             {
                 MessageBox.Show("The resources were avalible and are now locked for the purchase.");
-                if(TryingToUseGoldElsewere)
+                if (TryingToUseGoldElsewere)
                 {
-
                 }
                 if (TryingToUpgradeTownHall)
                 {
@@ -158,9 +154,5 @@ namespace The_RPG_thread_game
             TryingToUpgradeTownHall = false;
             MessageBox.Show("Purchase complete. Remaning resources are now avalible.");
         }
-    }  
+    }
 }
-
-       
-
-      

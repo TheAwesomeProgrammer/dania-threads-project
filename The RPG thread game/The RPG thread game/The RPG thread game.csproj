@@ -82,6 +82,7 @@
     <Compile Include="GameObjectClasses\Ally\Unit\Worker\Farmer\Farmer.cs" />
     <Compile Include="GameObjectClasses\Ally\Unit\Worker\Miner\Miner.cs" />
     <Compile Include="GameObjectClasses\Ally\Unit\Worker\Worker.cs" />
+    <Compile Include="GameObjectClasses\Bar\HealthBar.cs" />
     <Compile Include="GameObjectClasses\CollideableSprite.cs" />
     <Compile Include="GameObjectClasses\Ally\Unit\Monster\Monster.cs" />
     <Compile Include="GameObjectClasses\Ally\Unit\Monster\MonsterArcher\MonsterArcher.cs" />
@@ -91,10 +92,8 @@
     <Compile Include="GameObjectClasses\NonCollidingSprite.cs" />
     <Compile Include="GameObjectClasses\Sprite.cs" />
     <Compile Include="GameObjectClasses\ThreadObjects\GameObjectDecorator.cs" />
-    <Compile Include="GameObjectClasses\ThreadObjects\LifeObjectDecorator.cs" />
     <Compile Include="GameObjectClasses\ThreadObjects\Threadable.cs" />
     <Compile Include="GameObjectClasses\ThreadObjects\ThreadUpdating.cs" />
-    <Compile Include="GameObjectClasses\ThreadObjects\ThreadLifeObject.cs" />
     <Compile Include="Interfaces\Collideable.cs" />
     <Compile Include="Interfaces\Killable.cs" />
     <Compile Include="Interfaces\Upgradeable.cs" />
@@ -109,12 +108,15 @@
     <Compile Include="OtherClasses\Keyboard.cs" />
     <Compile Include="OtherClasses\MainMenu.cs" />
     <Compile Include="OtherClasses\ThreadManager.cs" />
-    <Compile Include="OtherClasses\UI\About\AboutButton.cs" />
     <Compile Include="OtherClasses\UI\DragNDropButtons\DragNDropButton.cs" />
     <Compile Include="OtherClasses\UI\DragNDropButtons\BarrackDragNDropButton.cs" />
     <Compile Include="OtherClasses\UI\DragNDropButtons\FarmDragNDropButton.cs" />
+    <Compile Include="OtherClasses\UI\MenuButtons\AboutButton.cs" />
+    <Compile Include="OtherClasses\UI\MenuButtons\BackButton.cs" />
+    <Compile Include="OtherClasses\UI\MenuButtons\CreditButton.cs" />
+    <Compile Include="OtherClasses\UI\MenuButtons\ExitButton.cs" />
+    <Compile Include="OtherClasses\UI\MenuButtons\PlayGameButton.cs" />
     <Compile Include="OtherClasses\UI\Mouse.cs" />
-    <Compile Include="OtherClasses\UI\PlayGameButton\PlayGameButton.cs" />
     <Compile Include="OtherClasses\UI\TownHall\Builder.cs" />
     <Compile Include="OtherClasses\UI\TownHall\BuildWorkerButton.cs" />
     <Compile Include="OtherClasses\UI\TownHall\Recruiter.cs" />
@@ -158,12 +160,32 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <Folder Include="OtherClasses\UI\MenuButtons\GameButtons\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\1GoldMine.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\2GoldMine.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\3GoldMine.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\4GoldMine.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\5GoldMine.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\apple.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\bar.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\bgImage2.PNG">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Lvl1TownHall.png">
@@ -176,6 +198,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Lvl4TownHall.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Minerleft.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Minerright.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Monsters\Warrior.png">

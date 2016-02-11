@@ -4,26 +4,25 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using The_RPG_thread_game;
 
 namespace The_RPG_thread_game
 {
-    internal class AboutButton : UIButton
+    internal class LevelUpgradable : UIButton
     {
-        public AboutButton(Vector2 position, SizeF sizeF, MainMenu mainMenuSender) : 
-            base(position, sizeF, mainMenuSender)
+        public LevelUpgradable(Vector2 position, float width, float height, GameObject goSender, GameWorld gwSender) : base(position, width, height, goSender, gwSender)
         {
-            ButtonText = "About";
+            ButtonText = "Level Up (" + goSender.LvlUpCost + ")";
             FontSize = 16;
             TextPosition = new Vector2(position.X + 93, position.Y + 13);
         }
 
         public override void OnClick()
         {
-            foreach (UIButton UIB in Sender.uiToDraw)
+            foreach (UIButton UIB in gwSender.uiToDraw)
             {
-                Sender.uiToRemove.Add(UIB);
+                gwSender.uiToRemove.Add(UIB);
             }
+            (goSender as Upgradable).OnLvlUp();
         }
 
         public override void Draw(Graphics dc)

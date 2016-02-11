@@ -9,10 +9,9 @@ namespace The_RPG_thread_game
         protected string DragImagePath;
         protected Enum DragEnum = StructureType.Farm;
 
-        public DragNDropButton(Vector2 position, SizeF sizeF, object mainMenuSender) :
-            base(position, sizeF, mainMenuSender)
+        public DragNDropButton(Vector2 position, SizeF sizeF, object Sender) :
+            base(position, sizeF, Sender)
         {
-           
         }
 
         protected override void Init()
@@ -20,7 +19,6 @@ namespace The_RPG_thread_game
             base.Init();
             DragImagePath = @"Resources\Structures\" + DragEnum + ".png";
         }
-
 
         public override void OnClick()
         {
