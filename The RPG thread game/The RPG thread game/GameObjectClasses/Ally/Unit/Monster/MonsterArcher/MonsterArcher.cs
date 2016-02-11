@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace The_RPG_thread_game
 {
-    public abstract class Enemy : NonCollidingSprite
+    public class MonsterArcher : Monster
     {
-        public Enemy(Vector2 startPos, string imagePath, float scaleFactor) :
-            base(startPos, imagePath, scaleFactor)
+        public MonsterArcher(Vector2 startPos, Vector2 endPosition, Team team) :
+            base(startPos,endPosition,team)
         {
 
         }
 
+       
     }
 }

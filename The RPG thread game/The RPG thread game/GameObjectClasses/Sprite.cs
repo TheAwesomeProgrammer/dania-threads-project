@@ -1,33 +1,70 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace The_RPG_thread_game
 {
     public abstract class Sprite : GameObject
     {
+        public SizeF SizeF;
+
         protected Image Image;
         protected float ScaleFactor;
-        protected SizeF Size;
+        
+        protected string ImagePath = @"Resources\apple.png";
+        protected Vector2 MyCenter = new Vector2(0,0);
 
-        protected Sprite(Vector2 startPos,string imagePath,float scaleFactor) : 
+        protected Vector2 Center => MyCenter;
+
+        protected Sprite(Vector2 startPos) : 
             base(startPos)
         {
-            Image = Image.FromFile(imagePath);
-            ScaleFactor = scaleFactor;
-            Size = new SizeF(ScaleFactor * Image.Height,ScaleFactor * Image.Width);
-            StartPos = startPos;
+           
         }
 
-        protected Sprite(Vector2 startPos, string imagePath, SizeF size) :
+        protected Sprite(Vector2 startPos, SizeF sizeF) :
            base(startPos)
         {
-            Image = Image.FromFile(imagePath);
-            Size = size;
-            StartPos = startPos;
+            SetStats(sizeF);
+        }
+
+        protected Sprite(Vector2 startPos, string imagePath) :
+            base(startPos)
+        {
+            ImagePath = imagePath;
+        }
+
+        private void SetStats(SizeF sizeF)
+        {
+            SizeF = sizeF;
+        }
+
+        protected override void Init()
+        {
+            LoadImage();
+            MyCenter = new Vector2(Position.X + SizeF.Width / 2,Position.Y + SizeF.Height / 2);
+        }
+
+        protected virtual void LoadImage()
+        {
+            if (ImagePath != "")
+            {
+                Image = Image.FromFile(ImagePath);
+                if (ScaleFactor > 0)
+                {
+                    SizeF = new SizeF(ScaleFactor * Image.Height, ScaleFactor * Image.Width);
+                }
+            }
+          
         }
 
         public virtual void Draw(Graphics graphics)
         {
-
+            if (IsFirstRun)
+            {
+                IsFirstRun = false;
+                Init();
+            }
+            graphics.DrawImage(Image,Position.X,Position.Y,SizeF.Width,SizeF.Height);
         }
     }
 }

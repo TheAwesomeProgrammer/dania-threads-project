@@ -1,43 +1,58 @@
-﻿using The_RPG_thread_game;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using The_RPG_thread_game;
 
 namespace The_RPG_thread_game.Utillity
 {
     public class WaypointFollow
     {
-        private DateTimeTimer Timer = DateTimeTimer.Instance;
-        private float ReachedTargetThreeshold = 5;
+        private Counter Counter = Counter.Instance;
+        private float ReachedTargetThreeshold = 1f;
 
-        private float PixelsPerSecound;
+        private float Speed;
         private Vector2 TargetPoint;
         private Vector2 StartPoint;
 
-        public WaypointFollow(float pixelsPerSecound)
+        private List<Vector2> Positions = new List<Vector2>();
+
+        public WaypointFollow(float speed)
         {
-            PixelsPerSecound = pixelsPerSecound;
+            Speed = speed;
         }
 
-        public void MoveToPoint(Vector2 startPoint, Vector2 point)
+        public void MoveToPoint(Vector2 startPoint, Vector2 endPoint)
         {
             StartPoint = startPoint;
-            Timer.StartTimer(GetHashCode());
-            TargetPoint = point;
+            Counter.StartCounter(GetHashCode());
+            TargetPoint = endPoint;
+            Positions.Clear();
         }
 
-        public Vector2 GetCurrentPoint(float deltaTime)
+        public Vector2 GetCurrentPoint(Vector2 currentPosition,double deltaTime)
         {
-            float TimeGoneInMilliSecounds = (float)(Timer.GetTimeGone(GetHashCode()).TotalMilliseconds / 1000);
-            return StartPoint + (GetDiretionToTarget() * PixelsPerSecound * TimeGoneInMilliSecounds);
+            return currentPosition +(GetDiretionToTarget() * (float)deltaTime * Speed);
         }
 
-        public bool HasReachedTarget(Vector2 currentPosition)
-        {
-            return currentPosition.DistanceToVector(TargetPoint) < ReachedTargetThreeshold;
-        }
+     
 
         private Vector2 GetDiretionToTarget()
         {
             return (StartPoint.Substract(TargetPoint)).Normalized;
         }
+
+        public bool HasReachedTarget(Vector2 currentPosition)
+        {
+            return currentPosition.DistanceToVector(TargetPoint) <= ReachedTargetThreeshold;
+        }
+
+        
+
+     
+
+        
+
+       
 
 
 

@@ -1,31 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading;
+using The_RPG_thread_game.Farm_Semphore_;
 
-namespace The_RPG_thread_game.Farm_Semphore_
+namespace The_RPG_thread_game.GameObjectClasses.Ally.Structure
 {
-    public class Farm
+    public class Farm : The_RPG_thread_game.Structure
     {
         public int StartFarmerCount = 5;
         public int MaxFarmerCount = 5;
         public int MeatPerFarmer = 5;
 
-        public int FarmingTimeInMilliSecounds = 1;
-
         private Semaphore SemaphoreLock;
 
-        public Farm()
+        public Farm(Vector2 startPos) :
+            base(startPos)
         {
             SemaphoreLock = new Semaphore(StartFarmerCount, MaxFarmerCount);
         }
 
-        public void Enter()
+        public override void Enter()
         {
             SemaphoreLock.WaitOne(-1);
-            Thread.Sleep(FarmingTimeInMilliSecounds);
+            base.Enter();
             ResourceManager.Instance.Meat += MeatPerFarmer;
             SemaphoreLock.Release();
         }

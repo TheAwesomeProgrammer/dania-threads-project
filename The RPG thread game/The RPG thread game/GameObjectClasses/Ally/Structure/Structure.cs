@@ -2,23 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using The_RPG_thread_game.DragNDrop;
 
 namespace The_RPG_thread_game
 {
-    public abstract class Structure : Ally
+    public abstract class Structure : Unit
     {
-        public bool HasEntered;
+        public bool HasEntered = false;
 
-        public Structure(Vector2 startPos, string imagePath, float scaleFactor) : 
-            base(startPos,imagePath,scaleFactor)
+        protected int WaitingTimeInMilliSecounds = 200;
+
+        public Structure(Vector2 startPos) : 
+            base(startPos,Team.Ally)
         {
             
         }
 
-        public void Enter()
+        public virtual void Enter()
         {
             HasEntered = true;
+            Thread.Sleep(WaitingTimeInMilliSecounds);
         }
 
     }

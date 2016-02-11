@@ -5,46 +5,54 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using The_RPG_thread_game;
 using The_RPG_thread_game.Utillity;
 using System.Diagnostics;
+using The_RPG_thread_game.Farm_Semphore_;
+using The_RPG_thread_game.GameObjectClasses.Ally.Structure;
+using The_RPG_thread_game.GameObjectClasses.ThreadObjects;
 
 namespace Testing
 {
     [TestClass]
     public class TestWorker
     {
-        private float TimeOutThreeshold = 5000;
-        private int TimeOutID = 1;
-        private int Framerate = 60;
+        private const float TimeOutThreeshold = 5000;
+        private const int TimeOutID = 1;
+        private const int Framerate = 60;
+        private DateTime StartTime;
+        private DateTime EndTime;
 
         [TestMethod]
         public void TestWorkerMovingBetweenStructures()
         {
-            Structure StartStructure = new BigTownhall(new Vector2(20, 20), @"Resources\apple.png", 1);
-            Structure EndStructure = new BigTownhall(new Vector2(10, 10), @"Resources\apple.png", 1);
-            Worker Worker = new Farmer(new Vector2(0, 0), @"Resources\apple.png", 1, StartStructure, EndStructure);
-            DateTimeTimer Timer = DateTimeTimer.Instance;
+            Structure StartStructure = new Farm(new Vector2(20, 20));
+            Structure EndStructure = new Farm(new Vector2(10, 10));
+            GameObject Worker = new Farmer(new Vector2(0, 0), StartStructure, EndStructure);
+            Worker = new ThreadUpdating(Worker);
+            Counter Counter = Counter.Instance;
 
-            Timer.StartTimer(GetHashCode());
-            Timer.StartTimer(TimeOutID);
+            Counter.StartCounter(TimeOutID);
             while (true)
             {
-                if (Timer.GetTimeGone(1).TotalMilliseconds > TimeOutThreeshold ||
+                if (Counter.GetTimeGone(1) > TimeOutThreeshold ||
                     StartStructure.HasEntered && EndStructure.HasEntered)
                 {
                     break;
                 }
-                WorkerThread(Worker,Timer);
+                WorkerThread(Worker);
                 Thread.Sleep(1000 / Framerate);
             }
 
             Assert.AreEqual(true, StartStructure.HasEntered && EndStructure.HasEntered);
         }
 
-        private void WorkerThread(Worker worker,DateTimeTimer timer)
+        private void WorkerThread(GameObject worker)
         {
-            float DeltaTime = (float)(timer.GetTimeGone(GetHashCode()).TotalMilliseconds / 1000);
+            double DeltaTime = (EndTime - StartTime).TotalMilliseconds/1000;
+            Time.Instance.AddTime(DeltaTime);
+            StartTime = DateTime.Now;
+            
             worker.Update(DeltaTime);
 
-            timer.StartTimer(GetHashCode());
+            EndTime = DateTime.Now;
 
         }
 

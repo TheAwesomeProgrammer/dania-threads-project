@@ -24,8 +24,14 @@ namespace The_RPG_thread_game
         
         public bool TryingToUpgradeTownHall;
         public bool TryingToUseGoldElsewere;
+
+        private static int GameLoopThreadId = 1;
+        private int MainMenuThreadId = 2;
+        private int TimeThreadId = 3;
+
         private Thread TownHallUpgradeThread;
         private static Thread GameLoopThread;
+       
         private Graphics dc;
         private MainMenu mainMenu;
         private GameWorld GameWorld;
@@ -46,15 +52,21 @@ namespace The_RPG_thread_game
             townHall = new TownHall(this);
             mainMenu = new MainMenu(dc, DisplayRectangle);
             GameWorld = new GameWorld(dc,DisplayRectangle);
+            GameLoopThread = new Thread(() => GameWorld.GameLoop(GameLoopThreadId));
             ThreadManager = ThreadManager.Instance;
-            Thread MainMenuThread = new Thread(() => mainMenu.MenuLogic());
-            GameLoopThread = new Thread(() => GameWorld.GameLoop());
-            ThreadManager.SetMainThread(MainMenuThread);
+            Thread MainMenuThread = new Thread(() => mainMenu.MenuLogic(MainMenuThreadId));
+            ThreadManager.AddThread(MainMenuThread,MainMenuThreadId,ThreadPriority.Highest);
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            ThreadManager.RemoveAllThreads();
         }
 
         public static void StartGameLoop()
         {
-            ThreadManager.SetMainThread(GameLoopThread); 
+            ThreadManager.AddThread(GameLoopThread, GameLoopThreadId, ThreadPriority.Highest); 
         }
 
         
@@ -62,8 +74,8 @@ namespace The_RPG_thread_game
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
             //Sends the mouse positions every time
-            Mouse.X = e.X;
-            Mouse.Y = e.Y;
+            Mouse.Position.X = e.X;
+            Mouse.Position.Y = e.Y;
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)

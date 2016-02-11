@@ -8,8 +8,8 @@ namespace The_RPG_thread_game
 {
     internal class Swordsman : Infantry
     {
-        public Swordsman(Vector2 startPos, string imagePath, float scaleFactor) : 
-            base(startPos,imagePath,scaleFactor)
+        public Swordsman(Vector2 startPos) : 
+            base(startPos)
         {
 
         }

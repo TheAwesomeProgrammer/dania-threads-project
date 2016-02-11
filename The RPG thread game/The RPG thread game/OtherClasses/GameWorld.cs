@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using The_RPG_thread_game.DragNDrop;
+using The_RPG_thread_game.GameObjectClasses.Ally.Unit.Monster;
+using The_RPG_thread_game.GameObjectClasses.ThreadObjects;
 using The_RPG_thread_game.Utillity;
 
 namespace The_RPG_thread_game
@@ -11,70 +16,120 @@ namespace The_RPG_thread_game
     internal class GameWorld
     {
         public static List<GameObject> Objects = new List<GameObject>();
-        public static List<CollidingSprite> CollidingSprites = new List<CollidingSprite>();
+        public static List<CollideableSprite> ColliableSprites = new List<CollideableSprite>();
+        public static List<Sprite> Sprites = new List<Sprite>();
 
-        private List<GameObject> ObjectsToAdd = new List<GameObject>();
+        private const int FrameRate = 60;
+
+        private static List<GameObject> ObjectsToAdd = new List<GameObject>();
         private static List<GameObject> ObjectsToRemove = new List<GameObject>();
-        private DateTimeTimer Timer;
-        private Graphics Graphics;
-        private Rectangle DisplayRectangle;
+        private Counter Counter;
+        private ThreadManager ThreadManager;
+        private Render Render;
+        private Time Time;
+        private DateTime StartTime;
+        private DateTime EndTime;
+
+        private double NextUpdateTime;
+
+
 
         public GameWorld(Graphics dc, Rectangle displayRect)
         {
-            Graphics = dc;
-            DisplayRectangle = displayRect;
-            Timer = DateTimeTimer.Instance;
+            Render = new Render(dc,displayRect);
+            Display.Instance.SetDisplayRectangle(displayRect);
+            ThreadManager = ThreadManager.Instance;
+            Counter = Counter.Instance;
+            Time = Time.Instance;
         }
 
-        public void GameLoop()
+        public void GameLoop(int threadId)
         {
-            float DeltaTime = (float)Timer.GetTimeGone(GetHashCode()).TotalMilliseconds/1000;
+           Setup();
 
-            Update(DeltaTime);
-            Draw(Graphics);
+            while (ThreadManager.DoesThreadExist(threadId))
+            {
+                double DeltaTime = (EndTime - StartTime).TotalMilliseconds/1000;
+                NextUpdateTime += DeltaTime;
+                StartTime = DateTime.Now;
+                
+                if (NextUpdateTime >= (double)1 / FrameRate)
+                {
+                    Update(NextUpdateTime);
+                    Draw(Render.Graphics);
+                    NextUpdateTime = 0;
+                }
+              
 
-
-            Timer.StartTimer(GetHashCode());
+                EndTime = DateTime.Now;
+            }
         }
 
-        public void Update(float deltaTime)
+        private void Setup()
         {
-            Objects.DoActionOnItems(gameObject => gameObject.Update(deltaTime));
+            Counter.StartCounter(GetHashCode());
+            AddObjectInNextCycle(new BarrackDragNDropButton(new Vector2(50,100), new SizeF(50,50),this));
+            AddObjectInNextCycle(new StructureMonsterSpawner());
         }
 
-        public void Draw(Graphics graphics)
+        private void Update(double deltaTime)
         {
-            Objects.DoActionOnItemsMatchingPredicate(gameObject => gameObject is Sprite,
-                gameObject => (gameObject as Sprite).Draw(graphics));
+            Time.AddTime(deltaTime);
+            RemoveObjects();
+            AddObjects();
+            UpdateObjects(deltaTime);
         }
+
+        private void AddObjects()
+        {
+            Sprites.AddRange(ObjectsToAdd.FindAll(Object => Object is Sprite).Cast<Sprite>().ToList());
+            ColliableSprites.AddRange(ObjectsToAdd.FindAll(Object => Object is CollideableSprite).Cast<CollideableSprite>().ToList());
+            Objects.AddRange(ObjectsToAdd);
+
+            ObjectsToAdd.Clear();
+        }
+
+        private void RemoveObjects()
+        {
+            Objects.RemoveAll(Object => ObjectsToRemove.Contains(Object));
+            ColliableSprites.RemoveAll(Object => ObjectsToRemove.Contains(Object));
+            Sprites.RemoveAll(Object => ObjectsToRemove.Contains(Object));
+
+            ObjectsToRemove.Clear();
+        }
+
+        private void UpdateObjects(double deltaTime)
+        {
+            Objects.DoActionOnItemsMatchingPredicate(gameObject => !gameObject.IsThreadable,
+                gameObject => gameObject.Update(deltaTime));
+        }
+
+        private void Draw(Graphics graphics)
+        {
+            Render.Clear();
+
+            DrawObjects(graphics);
+            
+            Render.RenderBackBuffer();
+        }
+
+        private void DrawObjects(Graphics graphics)
+        {
+            Sprites.DoActionOnItems(sprite => sprite.Draw(graphics));
+        }
+
+
 
         public static void RemoveObjectInNextCycle(GameObject objectToRemove)
         {
             ObjectsToRemove.Add(objectToRemove);
         }
 
-        public void AddObjectInNextCycle(GameObject objectToAdd)
+        public static void AddObjectInNextCycle(GameObject objectToAdd)
         {
             ObjectsToAdd.Add(objectToAdd);
         }
 
-        public void RemoveObjects()
-        {
-            Objects.RemoveAll(Object => ObjectsToRemove.Contains(Object));
-            ObjectsToRemove.Clear();
-        }
-
-        public void AddObjects()
-        {
-            Func<GameObject, bool> NonCollidingPredicate = Object => ObjectsToAdd.Contains(Object) && !(Object is CollidingSprite);
-            Func<GameObject, bool> CollidingPredicate = Object => ObjectsToAdd.Contains(Object) && Object is CollidingSprite;
-
-            Objects.DoActionOnItemsMatchingPredicate(NonCollidingPredicate,
-                item => Objects.Add(item));
-            CollidingSprites.DoActionOnItemsMatchingPredicate(CollidingPredicate,
-                item => CollidingSprites.Add(item as CollidingSprite));
-
-            ObjectsToAdd.Clear();
-        }
+      
     }
 }

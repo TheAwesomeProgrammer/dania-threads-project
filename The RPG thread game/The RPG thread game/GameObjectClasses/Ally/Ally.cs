@@ -9,17 +9,21 @@ using The_RPG_thread_game.Utillity;
 
 namespace The_RPG_thread_game
 {
-    public abstract class Ally : NonCollidingSprite
+    public abstract class Ally : CollideableSprite
     {
-       
+        public Team Team { get; set; }
 
-        public Ally(Vector2 startPos,string imagePath,float scaleFactor) :
-            base(startPos, imagePath, scaleFactor)
+        public Ally(Vector2 startPos) :
+            base(startPos)
         {
             
         }
 
-      
+        public bool IsEnemy(AttackingUnit attackingUnit)
+        {
+            return Team == Team.Enemy && attackingUnit.Team == Team.Ally ||
+                   Team == Team.Ally && attackingUnit.Team == Team.Enemy;
+        }
 
     }
 }

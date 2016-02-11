@@ -6,24 +6,28 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using The_RPG_thread_game;
+using The_RPG_thread_game.Utillity;
 
 namespace The_RPG_thread_game
 {
-    internal class MainMenu
+    public class MainMenu
     {
-        private Graphics dc;
-        private BufferedGraphics backBuffer;
-        private Image bgImage;
         public List<UIButton> uiToDraw;
         public List<UIButton> uiToAdd;
         public List<UIButton> uiToRemove;
         public Rectangle Display { get; set; }
         public bool inMenu;
 
+        private Graphics Graphics;
+        private Image bgImage;
+        private int ThreadId;
+        private Render Render;
+       
+
         public MainMenu(Graphics dc, Rectangle display)
         {
-            backBuffer = BufferedGraphicsManager.Current.Allocate(dc, display);
-            this.dc = backBuffer.Graphics;
+            Render = new Render(dc,display);
+            Graphics = Render.Graphics;
             Display = display;
             uiToDraw = new List<UIButton>();
             uiToAdd = new List<UIButton>();
@@ -32,17 +36,23 @@ namespace The_RPG_thread_game
             bgImage = Image.FromFile(@"Resources/apple.png");
         }
 
-        public void MenuLogic()
+        public void MenuLogic(int threadId)
         {
-            uiToAdd.Add((new PlayGameButton(new Vector2(500, 150), 250, 50, this)));
-            uiToAdd.Add((new AboutButton(new Vector2(500, 220), 250, 50, this)));
+            ThreadId = threadId;
+            uiToAdd.Add((new PlayGameButton(new Vector2(500, 150), new SizeF(250,50), this)));
+            uiToAdd.Add((new AboutButton(new Vector2(500, 220), new SizeF(250,50), this)));
 
-            while (true)
+            while (ThreadManager.Instance.DoesThreadExist(threadId))
             {
                 UIFunction();
                 MouseActions();
                 DrawUI();
             }
+        }
+
+        public void StopThread()
+        {
+            ThreadManager.Instance.RemoveThread(ThreadId);
         }
 
         private void UIFunction()
@@ -65,8 +75,10 @@ namespace The_RPG_thread_game
         {
             foreach (UIButton UIB in uiToDraw)
             {
-                if (Mouse.Y > UIB.Position.Y && Mouse.Y < (UIB.Position.Y + UIB.Height) &&
-                   Mouse.X > UIB.Position.X && Mouse.X < (UIB.Position.X + UIB.Width))
+                Vector2 MousePosition = Mouse.Position;
+
+                if (MousePosition.Y > UIB.Position.Y && MousePosition.Y< (UIB.Position.Y + UIB.SizeF.Height) &&
+                   MousePosition.X > UIB.Position.X && MousePosition.X < (UIB.Position.X + UIB.SizeF.Width))
                 {
                     if (Mouse.IsMouseDown)
                     {
@@ -86,14 +98,15 @@ namespace The_RPG_thread_game
 
         private void DrawUI()
         {
-            dc.Clear(Color.White);
-            dc.DrawImage(bgImage, new Rectangle(0, 0, 1280, 720));
+            Render.Clear();
+            Graphics.DrawImage(bgImage, new Rectangle(0, 0, 1280, 720));
 
             foreach (UIButton UIB in uiToDraw)
             {
-                UIB.Draw(dc);
+                UIB.Update(0);
+                UIB.Draw(Graphics);
             }
-            backBuffer.Render();
+            Render.RenderBackBuffer();
         }
     }
 }

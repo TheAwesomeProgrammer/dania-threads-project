@@ -25,25 +25,40 @@ namespace The_RPG_thread_game
 
         private ThreadManager() { }
 
-        public void SetMainThread(Thread thread,int id)
+        public void AddThread(Thread thread,int id,ThreadPriority threadPriority)
         {
-            Thread DoesThreadExist = Threads[id];
-
-            if (DoesThreadExist.Equals(null))
+            if (!Threads.ContainsKey(id))
             {
                 Threads.Add(id, thread);
-                thread.StartAndRunInFront();
             }
-            else if(!DoesThreadExist.IsAlive)
+            if (thread != null)
             {
-                DoesThreadExist = thread;
+                if (!thread.IsAlive)
+                {
+                    thread.StartAndRunInFront();
+                }
+                thread.Priority = threadPriority;
             }
-
         }
 
-        public bool IsMainThread(int id)
+        public void AddThread(Thread thread, int id)
+        {
+            AddThread(thread,id,ThreadPriority.Normal);
+        }
+
+        public bool DoesThreadExist(int id)
         {
             return Threads.ContainsKey(id);
+        }
+
+        public void RemoveThread(int id)
+        {
+            Threads.Remove(id);
+        }
+
+        public void RemoveAllThreads()
+        {
+            Threads.Clear();
         }
 
        

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using The_RPG_thread_game;
 using The_RPG_thread_game.Farm_Semphore_;
+using The_RPG_thread_game.GameObjectClasses.Ally.Structure;
 using The_RPG_thread_game.Utillity;
 
 namespace Testing
@@ -21,7 +23,7 @@ namespace Testing
         [TestMethod]
         public void TestEnteringOfFarm()
         {
-            Farm Farm = new Farm();
+            Farm Farm = new Farm(new Vector2(0,0));
             ResourceManager.Instance.Meat = 0;
             Thread Thread = new Thread(() => FarmThread(Farm));
 
@@ -33,7 +35,7 @@ namespace Testing
         [TestMethod]
         public void TestSemaphoreWaitingWithXAntalFarmers()
         {
-            Farm Farm = new Farm();
+            Farm Farm = new Farm(new Vector2(0, 0));
             ResourceManager.Instance.Meat = 0;
             Thread[] Threads = new Thread[Farm.MaxFarmerCount + WaitingFarmers];
             

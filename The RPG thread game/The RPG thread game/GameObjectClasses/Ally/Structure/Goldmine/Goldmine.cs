@@ -8,8 +8,8 @@ namespace The_RPG_thread_game
 {
     internal class Goldmine : Structure
     {
-        public Goldmine(Vector2 startPos, string imagePath, float scaleFactor) :
-            base(startPos, imagePath, scaleFactor)
+        public Goldmine(Vector2 startPos) :
+            base(startPos)
         {
 
         }

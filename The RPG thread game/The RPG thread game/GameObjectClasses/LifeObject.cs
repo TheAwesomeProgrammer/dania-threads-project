@@ -1,16 +1,18 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
+using The_RPG_thread_game.GameObjectClasses.ThreadObjects;
 using The_RPG_thread_game.Utillity;
 
 namespace The_RPG_thread_game
 {
-    public class KillableGameObject : GameObject
+    public class LifeObject : GameObjectDecorator
     {
-        protected int MaxHealth;
-        protected int MyHealth;
+        protected int MaxHealth = 3;
+        protected int MyHealth = 3;
 
         protected Limit HealthLimit;
 
-        protected int Health
+        public int Health
         {
             get { return MyHealth; }
             set
@@ -26,13 +28,13 @@ namespace The_RPG_thread_game
             }
         }
 
-        public KillableGameObject(Vector2 startPos) : 
-            base(startPos)
+        public LifeObject(GameObject gameObject) : 
+            base(gameObject)
         {
             HealthLimit = new Limit(MaxHealth);
         }
 
-        public override void Update(float deltaTime)
+        public override void Update(double deltaTime)
         {
             base.Update(deltaTime);
             ShouldDie();
@@ -44,6 +46,13 @@ namespace The_RPG_thread_game
             {
                 Die();
             }
+        }
+
+        public override void Die()
+        {
+            MyGameObject.Die();
+            base.Die();
+            
         }
     }
 }

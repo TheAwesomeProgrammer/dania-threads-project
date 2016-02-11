@@ -8,43 +8,85 @@ using The_RPG_thread_game;
 
 namespace The_RPG_thread_game
 {
-    internal abstract class UIButton
+    public abstract class UIButton : CollideableSprite
     {
-        protected MainMenu mainMenuSender;
-        protected string ButtonText { get; set; }
-        protected FontFamily Font { get; set; }
-        protected int FontSize { get; set; }
-        public Vector2 Position { get; set; }
-        private bool IsHovered;
+        public MainMenu Sender;
         public Color BackgroundColor { get; set; }
         public Color TextColor { get; set; }
         public Color OnHoverColor { get; set; }
         public Vector2 TextPosition { get; set; }
-        public float Width { get; set; }
-        public float Height { get; set; }
+        
+        protected string ButtonText { get; set; }
+        protected FontFamily Font { get; set; }
+        protected int FontSize { get; set; }
 
-        protected UIButton(Vector2 position, float width, float height, MainMenu mainMenuSender)
+        private bool IsHovered;
+        private bool HasClicked;
+
+        protected UIButton(Vector2 position, SizeF sizeF, object mainMenuSender) : 
+            base(position,sizeF)
         {
-            this.mainMenuSender = mainMenuSender;
-            Position = position;
-            Width = width;
-            Height = height;
+            Sender = mainMenuSender as MainMenu;
+            Font = FontFamily.GenericSansSerif;
             OnHoverColor = Color.White;
             IsHovered = false;
-            Font = FontFamily.GenericSansSerif;
-            Position = new Vector2(position.X, position.Y);
+            BackgroundColor = Color.Blue;
+            ImagePath = "";
         }
 
-        public virtual void Draw(Graphics dc)
+        public override void Update(double deltaTime)
         {
-            BackgroundColor = Color.Blue;
+            base.Update(deltaTime);
+            CheckCollisionWithMouse();
+        }
+
+        protected void CheckCollisionWithMouse()
+        {
+            Vector2 MousePosition = Mouse.Position;
+
+            if (CollisionBox.Contains(MousePosition.ToPointF()))
+            {
+                if (Mouse.IsMouseDown && !HasClicked)
+                {
+                    OnClick();
+                    HasClicked = true;
+                }
+                else if (!Mouse.IsMouseDown)
+                {
+                    HasClicked = false;
+                }
+                else
+                {
+                    OnHover();
+                }
+            }
+            else
+            {
+                OnHoverExit();
+            }
+        }
+
+        public override void Draw(Graphics graphics)
+        {
             TextColor = Color.Black;
+            ShouldHover();
+            graphics.FillRectangle(new SolidBrush(BackgroundColor),
+                new RectangleF(Position.X, Position.Y, SizeF.Width, SizeF.Height));
+        }
+
+        private void ShouldHover()
+        {
             if (IsHovered == true)
             {
-                TextColor = OnHoverColor;
+                Hover();
             }
-            dc.FillRectangle(new SolidBrush(BackgroundColor), new Rectangle((int)Position.X, (int)Position.Y, (int)Width, (int)Height));
         }
+
+        protected void Hover()
+        {
+            TextColor = OnHoverColor;
+        }
+
 
         public void OnHover()
         {
@@ -57,5 +99,10 @@ namespace The_RPG_thread_game
         }
 
         public abstract void OnClick();
+
+        public override void OnCollision(List<CollideableSprite> spritesCollidingWith)
+        {
+            
+        }
     }
 }
