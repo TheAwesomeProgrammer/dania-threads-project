@@ -8,8 +8,8 @@ namespace The_RPG_thread_game
 {
     internal class LightningLauncher : Turret
     {
-        public LightningLauncher(Vector2 startPos) :
-            base(startPos)
+        public LightningLauncher(Vector2 startPos, string imagePath, float scaleFactor) :
+            base(startPos, imagePath, scaleFactor)
         {
         }
     }

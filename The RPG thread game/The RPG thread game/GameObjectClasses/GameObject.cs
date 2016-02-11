@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using The_RPG_thread_game.GameObjectClasses.ThreadObjects;
 
 namespace The_RPG_thread_game
 {
@@ -12,11 +11,8 @@ namespace The_RPG_thread_game
     {
         public Vector2 Position;
 
-        public bool IsThreadable;
-
         protected Vector2 StartPos;
 
-        protected bool IsFirstRun = true;
 
         public GameObject(Vector2 startPos)
         {
@@ -24,24 +20,13 @@ namespace The_RPG_thread_game
             Position = startPos;
         }
 
-        public virtual void Update(double deltaTime)
-        {
-            if (IsFirstRun)
-            {
-                IsFirstRun = false;
-                Init();
-            }
-        }
-
-        public virtual void UpdateAnimation(double deltaTime)
+        public virtual void Update(float deltaTime)
         {
         }
 
-        protected virtual void Init()
+        public virtual void UpdateAnimation(float deltaTime)
         {
-
         }
-
 
         public virtual void Die()
         {

@@ -8,8 +8,9 @@ namespace The_RPG_thread_game
 {
     internal static class Mouse
     {
-        public static Vector2 Position = new Vector2(0,0);
+        static public float X { get; set; }
+        static public float Y { get; set; }
 
-        public static bool IsMouseDown { get; set; }
+        static public bool IsMouseDown { get; set; }
     }
 }

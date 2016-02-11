@@ -10,8 +10,7 @@ namespace The_RPG_thread_game
 {
     internal class AboutButton : UIButton
     {
-        public AboutButton(Vector2 position, SizeF sizeF, object mainMenuSender) : 
-            base(position, sizeF, mainMenuSender)
+        public AboutButton(Vector2 position, float width, float height, MainMenu mainMenuSender) : base(position, width, height, mainMenuSender)
         {
             ButtonText = "About";
             FontSize = 16;
@@ -20,17 +19,17 @@ namespace The_RPG_thread_game
 
         public override void OnClick()
         {
-            foreach (UIButton UIB in Sender.uiToDraw)
+            foreach (UIButton UIB in mainMenuSender.uiToDraw)
             {
-                Sender.uiToRemove.Add(UIB);
+                mainMenuSender.uiToRemove.Add(UIB);
             }
         }
 
-        public override void Draw(Graphics graphics)
+        public override void Draw(Graphics dc)
         {
-            base.Draw(graphics);
+            base.Draw(dc);
 
-            graphics.DrawString(ButtonText, new Font(Font, FontSize), new SolidBrush(TextColor), TextPosition.X, TextPosition.Y);
+            dc.DrawString(ButtonText, new Font(Font, FontSize), new SolidBrush(TextColor), TextPosition.X, TextPosition.Y);
         }
     }
 }

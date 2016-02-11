@@ -1,58 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using The_RPG_thread_game.GameObjectClasses.ThreadObjects;
 using The_RPG_thread_game.Utillity;
 
 namespace The_RPG_thread_game
 {
-    public abstract class Worker : ThreadUnit
+    public abstract class Worker : Unit
     {
-        public float Speed = 100;
+        public float Speed = 10;
         
         private Structure StartStructure;
         private Structure EndStructure;
         private WaypointFollow WaypointFollow;
         private Structure CurrentTarget;
-        private Counter Counter;
 
-        public Worker(Vector2 startPos,Structure startStructure,Structure endStructure) : 
-            base(startPos,Team.Ally)
+        public Worker(Vector2 startPos, string imagePath, float scaleFactor,Structure startStructure,Structure endStructure) : 
+            base(startPos,imagePath,scaleFactor)
         {
             WaypointFollow = new WaypointFollow(Speed);
             StartStructure = startStructure;
             EndStructure = endStructure;
             CurrentTarget = EndStructure;
             WaypointFollow.MoveToPoint(Position, CurrentTarget.Position);
-            ThreadLifeObject.Health = 3;
         }
 
-        
-
-        public override void Update(double deltaTime)
+        public override void Update(float deltaTime)
         {
-            Counter.GetTimeGone(GetHashCode());
-
-            Counter.StartCounter(GetHashCode());
             base.Update(deltaTime);
-            Move(deltaTime);
             ShouldChangeTarget();
+            Move(deltaTime);
         }
 
-        private void Move(double deltaTime)
+        private void Move(float deltaTime)
         {
-            Position = WaypointFollow.GetCurrentPoint(Position,deltaTime);
-           
+            Position = WaypointFollow.GetCurrentPoint(deltaTime);
         }
 
         private void ShouldChangeTarget()
         {
             if (WaypointFollow.HasReachedTarget(Position))
             {
-                CurrentTarget.Enter();
+                CurrentTarget.HasEntered = true;
                 SwitchTarget();
             }
         }
@@ -60,7 +50,6 @@ namespace The_RPG_thread_game
         private void SwitchTarget()
         {
             CurrentTarget = CurrentTarget == EndStructure ? StartStructure : EndStructure;
-            WaypointFollow.MoveToPoint(Position,CurrentTarget.Position);
         }
     }
 }

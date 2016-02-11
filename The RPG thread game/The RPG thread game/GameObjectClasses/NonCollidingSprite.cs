@@ -4,15 +4,11 @@ namespace The_RPG_thread_game
 {
     public class NonCollidingSprite : Sprite
     {
-        public NonCollidingSprite(Vector2 startPos) : 
-            base(startPos)
+        protected NonCollidingSprite(Vector2 startPos, string imagePath,float scaleFactor) : 
+            base(startPos, imagePath, scaleFactor)
         {
-            
-        }
-
-        public NonCollidingSprite(Vector2 startPos, SizeF sizeF) :
-            base(startPos, sizeF)
-        {
+            Image = Image.FromFile(imagePath);
+            StartPos = startPos;
         }
     }
 }

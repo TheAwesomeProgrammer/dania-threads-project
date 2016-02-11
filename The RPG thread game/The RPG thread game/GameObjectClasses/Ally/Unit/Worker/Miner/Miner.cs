@@ -8,8 +8,8 @@ namespace The_RPG_thread_game
 {
     internal class Miner : Worker
     {
-        public Miner(Vector2 startPos, Structure startStructure,Structure endStructure) :
-                base(startPos, startStructure, endStructure)
+        public Miner(Vector2 startPos, string imagePath, float scaleFactor, Structure startStructure,Structure endStructure) :
+                base(startPos, imagePath, scaleFactor, startStructure, endStructure)
         {
         }
     }

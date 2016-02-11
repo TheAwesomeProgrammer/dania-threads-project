@@ -8,10 +8,10 @@ namespace The_RPG_thread_game
 {
     public class BigTownhall : Structure
     {
-        public BigTownhall(Vector2 startPos) :
-                base(startPos)
+        public BigTownhall(Vector2 startPos, string imagePath, float scaleFactor) :
+                base(startPos, imagePath, scaleFactor)
         {
-            Health = 100;
+
         }
     }
 }

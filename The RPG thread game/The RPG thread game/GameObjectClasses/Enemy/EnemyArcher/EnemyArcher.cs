@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace The_RPG_thread_game
 {
-    internal class Barracks : Structure
+    internal class EnemyArcher : Enemy
     {
-        public Barracks(Vector2 startPos, string imagePath, float scaleFactor) :
+        public EnemyArcher(Vector2 startPos, string imagePath, float scaleFactor) :
             base(startPos, imagePath, scaleFactor)
         {
 
         }
+
+       
     }
 }
