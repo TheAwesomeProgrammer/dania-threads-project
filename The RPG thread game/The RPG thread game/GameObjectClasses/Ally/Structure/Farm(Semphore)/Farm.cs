@@ -15,6 +15,7 @@ namespace The_RPG_thread_game.GameObjectClasses.Ally.Structure
             base(startPos)
         {
             SemaphoreLock = new Semaphore(StartFarmerCount, MaxFarmerCount);
+            ScaleFactor = 0.5f;
         }
 
         public override void Enter()

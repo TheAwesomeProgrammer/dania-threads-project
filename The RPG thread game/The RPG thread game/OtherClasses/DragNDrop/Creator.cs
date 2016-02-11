@@ -9,11 +9,6 @@ namespace The_RPG_thread_game.DragNDrop
 
         protected Factory Factory;
 
-        public Creator(Enum anEnum, Factory factory)
-        {
-            AnEnum = anEnum;
-            Factory = factory;
-        }
 
         public Creator(Enum anEnum, Factory factory,Vector2 startPosition)
         {

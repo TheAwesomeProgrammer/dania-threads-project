@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameObjectClasses\Ally\Faction.cs" />
+    <Compile Include="GameObjectClasses\Ally\KillableSprite.cs" />
     <Compile Include="GameObjectClasses\Ally\Structure\AttackingStructure.cs" />
     <Compile Include="GameObjectClasses\Ally\Structure\Barracks\EnemyBarrack.cs" />
     <Compile Include="GameObjectClasses\Ally\Structure\EmptyStructure.cs" />
@@ -61,11 +63,12 @@
     <Compile Include="GameObjectClasses\Ally\Structure\Barracks\Barracks.cs" />
     <Compile Include="GameObjectClasses\Ally\Structure\Goldmine\Goldmine.cs" />
     <Compile Include="GameObjectClasses\Ally\Structure\Structure.cs" />
+    <Compile Include="GameObjectClasses\Ally\Structure\StructureCreator.cs" />
     <Compile Include="GameObjectClasses\Ally\Structure\Townhall\BigTownhall.cs" />
     <Compile Include="GameObjectClasses\Ally\Structure\Turret\Cannon\Cannon.cs" />
     <Compile Include="GameObjectClasses\Ally\Structure\Turret\LightningLauncher\LightningLauncher.cs" />
     <Compile Include="GameObjectClasses\Ally\Structure\Turret\Turret.cs" />
-    <Compile Include="GameObjectClasses\Ally\Unit\Attackable.cs" />
+    <Compile Include="GameObjectClasses\Ally\Unit\Factionable.cs" />
     <Compile Include="GameObjectClasses\Ally\Unit\AttackingUnit.cs" />
     <Compile Include="GameObjectClasses\Ally\Unit\Infantry\Archer\Archer.cs" />
     <Compile Include="GameObjectClasses\Ally\Unit\Infantry\Infantry.cs" />
@@ -111,6 +114,7 @@
     <Compile Include="OtherClasses\UI\About\AboutButton.cs" />
     <Compile Include="OtherClasses\UI\DragNDropButtons\DragNDropButton.cs" />
     <Compile Include="OtherClasses\UI\DragNDropButtons\BarrackDragNDropButton.cs" />
+    <Compile Include="OtherClasses\UI\DragNDropButtons\FarmDragNDropButton.cs" />
     <Compile Include="OtherClasses\UI\PlayGameButton\PlayGameButton.cs" />
     <Compile Include="OtherClasses\UI\UIButton.cs" />
     <Compile Include="OtherClasses\UI\UIText.cs" />

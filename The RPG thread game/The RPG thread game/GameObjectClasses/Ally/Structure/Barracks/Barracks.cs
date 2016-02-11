@@ -16,6 +16,7 @@ namespace The_RPG_thread_game
         public Barracks(Vector2 startPos) :
             base(startPos)
         {
+            AttackSpeed = 5;
             ScaleFactor = 0.5f;
             ImagePath = @"Resources\Structures\Barrack.png";
         }

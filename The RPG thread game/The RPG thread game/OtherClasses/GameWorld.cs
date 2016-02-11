@@ -70,6 +70,7 @@ namespace The_RPG_thread_game
             Counter.StartCounter(GetHashCode());
             AddObjectInNextCycle(new BarrackDragNDropButton(new Vector2(50,100), new SizeF(50,50),this));
             AddObjectInNextCycle(new StructureMonsterSpawner());
+            AddObjectInNextCycle(new FarmDragNDropButton(new Vector2(50,150),new SizeF(50,50), this  ));
         }
 
         private void Update(double deltaTime)

@@ -14,7 +14,6 @@ namespace The_RPG_thread_game.DragNDrop
             base(startPos, imagePath)
         {
             DropCreator = dropCreator;
-            ScaleFactor = 0.5f;
         }  
 
         public override void OnCollision(List<CollideableSprite> spritesCollidingWith)

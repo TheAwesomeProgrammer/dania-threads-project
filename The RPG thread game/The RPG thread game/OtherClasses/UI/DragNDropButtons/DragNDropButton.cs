@@ -8,7 +8,6 @@ namespace The_RPG_thread_game
     {
         protected string DragImagePath;
         protected Enum DragEnum = StructureType.Farm;
-        protected float DragScaleFactor;
 
         public DragNDropButton(Vector2 position, SizeF sizeF, object mainMenuSender) :
             base(position, sizeF, mainMenuSender)

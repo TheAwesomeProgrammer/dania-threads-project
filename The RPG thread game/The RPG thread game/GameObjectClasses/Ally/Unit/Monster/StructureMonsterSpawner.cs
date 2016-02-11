@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using The_RPG_thread_game.DragNDrop;
+using The_RPG_thread_game.GameObjectClasses.Ally.Structure;
 using The_RPG_thread_game.Utillity;
 
 namespace The_RPG_thread_game.GameObjectClasses.Ally.Unit.Monster
@@ -44,7 +45,7 @@ namespace The_RPG_thread_game.GameObjectClasses.Ally.Unit.Monster
         private void Spawn()
         {
             Vector2 SpawnPosition = new Vector2(50,new Random().Next(0,DisplaySize.Height - BottomOffset));
-            DropCreator DropCreator = new DropCreator(StructureType.EnemyBarrack,new StructureObjectCreator(),SpawnPosition);
+            StructureCreator DropCreator = new StructureCreator(StructureType.EnemyBarrack,new StructureObjectCreator(),SpawnPosition);
             GameWorld.AddObjectInNextCycle(DropCreator.CreateObject());
         }
 

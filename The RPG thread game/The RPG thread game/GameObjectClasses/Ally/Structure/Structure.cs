@@ -8,7 +8,7 @@ using The_RPG_thread_game.DragNDrop;
 
 namespace The_RPG_thread_game
 {
-    public abstract class Structure : Unit
+    public abstract class Structure : KillableSprite
     {
         public bool HasEntered = false;
 
@@ -17,7 +17,6 @@ namespace The_RPG_thread_game
         public Structure(Vector2 startPos) : 
             base(startPos,Team.Ally)
         {
-            
         }
 
         public virtual void Enter()
