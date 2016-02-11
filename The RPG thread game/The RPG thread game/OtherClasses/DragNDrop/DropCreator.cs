@@ -12,6 +12,11 @@ namespace The_RPG_thread_game.DragNDrop
         {
         }
 
+        public DropCreator(Enum anEnum, Factory factory,Vector2 startPos) :
+           base(anEnum, factory, startPos)
+        {
+        }
+
         public void SetDropStats(Vector2 position)
         {
             StartPosition = position;

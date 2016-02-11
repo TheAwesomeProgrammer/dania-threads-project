@@ -9,7 +9,6 @@ namespace The_RPG_thread_game
             base(position, sizeF, mainMenuSender)
         {
             DragEnum = StructureType.Barrack;
-            DragScaleFactor = 0.5f;
         }
     }
 }

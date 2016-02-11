@@ -1,4 +1,5 @@
-﻿using The_RPG_thread_game.DragNDrop;
+﻿using System.Drawing;
+using The_RPG_thread_game.DragNDrop;
 using The_RPG_thread_game.GameObjectClasses.Ally.Unit.Monster;
 using The_RPG_thread_game.Utillity;
 
@@ -13,7 +14,7 @@ namespace The_RPG_thread_game
         protected Vector2 EndPosition;
         
 
-        private float NextTimeToAttack;
+        protected float NextTimeToAttack;
 
         private Time Time;
         protected MonsterCreator MonsterCreator;
@@ -39,7 +40,7 @@ namespace The_RPG_thread_game
             ShouldSpawnMonster();
         }
 
-        private void ShouldSpawnMonster()
+        protected virtual void ShouldSpawnMonster()
         {
             if (NextTimeToAttack <= Time.TimeSinceStart)
             {

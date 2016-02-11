@@ -16,9 +16,15 @@ namespace The_RPG_thread_game
         public Barracks(Vector2 startPos) :
             base(startPos)
         {
-            AttackSpeed = 5;
+            AttackSpeed = float.MaxValue;
+            NextTimeToAttack = AttackSpeed;
             ScaleFactor = 0.5f;
             ImagePath = @"Resources\Structures\Barrack.png";
+        }
+
+        public void SpawnMonsterWarrior()
+        {
+            SpawnMonster();
         }
 
     }

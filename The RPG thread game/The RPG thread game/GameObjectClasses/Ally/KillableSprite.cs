@@ -3,6 +3,7 @@
     public class KillableSprite : Faction
     {
         protected LifeObject LifeObject;
+        protected Vector2 HealthBarOffset;
 
         public int Health
         {
@@ -13,7 +14,7 @@
         public KillableSprite(Vector2 startPos, Team team) :
             base(startPos,team)
         {
-            LifeObject = new LifeObject(this);
+            LifeObject = new LifeObject(this, HealthBarOffset);
         }
 
         public override void Update(double deltaTime)

@@ -16,6 +16,7 @@ namespace The_RPG_thread_game.GameObjectClasses.Ally.Structure
         {
             SemaphoreLock = new Semaphore(StartFarmerCount, MaxFarmerCount);
             ScaleFactor = 0.5f;
+            ImagePath = @"Resources\Structures\Farm.png";
         }
 
         public override void Enter()

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
-using System.Linq;
 
 namespace The_RPG_thread_game.Utillity
 {
@@ -46,12 +45,7 @@ namespace The_RPG_thread_game.Utillity
 
         public static Vector2 ToVector2(this Point point)
         {
-            return new Vector2(point.X, point.Y);
-        }
-
-        public static Size ToSize(this SizeF sizeF)
-        {
-            return new Size((int)sizeF.Width,(int)sizeF.Height);
+            return new Vector2(point.X,point.Y);
         }
     }
 }

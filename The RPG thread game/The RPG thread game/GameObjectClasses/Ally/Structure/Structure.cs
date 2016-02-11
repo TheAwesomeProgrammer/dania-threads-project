@@ -13,6 +13,7 @@ namespace The_RPG_thread_game
         public bool HasEntered = false;
 
         protected int WaitingTimeInMilliSecounds = 200;
+        
 
         public Structure(Vector2 startPos) : 
             base(startPos,Team.Ally)

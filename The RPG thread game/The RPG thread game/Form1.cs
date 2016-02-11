@@ -21,9 +21,17 @@ namespace The_RPG_thread_game
     {      
         TownHall townHall;
         static object resourcesLock = new object();
-        
+
+        public bool TryingToBuildWOrker;
         public bool TryingToUpgradeTownHall;
         public bool TryingToUseGoldElsewere;
+        public Image TownHallImg = Image.FromFile(@"Resources/Lvl1TownHall.png");
+        public Image ResourceBarImg = Image.FromFile(@"Resources/bar.png");
+        public int QueuedWorkerCount = 0;
+
+        public bool MSChosen;
+        public bool DSChosen;
+        public bool UCChosen;
 
         private static int GameLoopThreadId = 1;
         private int MainMenuThreadId = 2;
@@ -36,6 +44,7 @@ namespace The_RPG_thread_game
         private MainMenu mainMenu;
         private GameWorld GameWorld;
         private static ThreadManager ThreadManager;
+
       
 
         public Form1()
@@ -140,6 +149,14 @@ namespace The_RPG_thread_game
                 Thread.Sleep(2000);
                 MessageBox.Show("Purchase complete. Remaning resources are now avalible.");
             }
+        }
+
+        public void UpgradeChosen()
+        {
+            townHall.Upgrade();
+            townHall.Progress();
+            TryingToUpgradeTownHall = false;
+            MessageBox.Show("Purchase complete. Remaning resources are now avalible.");
         }
     }  
 }

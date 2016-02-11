@@ -10,7 +10,7 @@ namespace The_RPG_thread_game
 {
     internal class AboutButton : UIButton
     {
-        public AboutButton(Vector2 position, SizeF sizeF, object mainMenuSender) : 
+        public AboutButton(Vector2 position, SizeF sizeF, MainMenu mainMenuSender) : 
             base(position, sizeF, mainMenuSender)
         {
             ButtonText = "About";
@@ -26,11 +26,11 @@ namespace The_RPG_thread_game
             }
         }
 
-        public override void Draw(Graphics graphics)
+        public override void Draw(Graphics dc)
         {
-            base.Draw(graphics);
+            base.Draw(dc);
 
-            graphics.DrawString(ButtonText, new Font(Font, FontSize), new SolidBrush(TextColor), TextPosition.X, TextPosition.Y);
+            dc.DrawString(ButtonText, new Font(Font, FontSize), new SolidBrush(TextColor), TextPosition.X, TextPosition.Y);
         }
     }
 }

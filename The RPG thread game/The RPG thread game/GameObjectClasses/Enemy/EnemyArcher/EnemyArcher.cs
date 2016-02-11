@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using The_RPG_thread_game;
 
 namespace The_RPG_thread_game
 {
-    public abstract class Unit : KillableSprite
+    internal class EnemyArcher : Enemy
     {
-        public Unit(Vector2 startPos, Team team) :
-           base(startPos,team)
+        public EnemyArcher(Vector2 startPos, string imagePath, float scaleFactor) :
+            base(startPos, imagePath, scaleFactor)
         {
 
         }
+
+       
     }
 }

@@ -27,7 +27,6 @@ namespace The_RPG_thread_game
             EndStructure = endStructure;
             CurrentTarget = EndStructure;
             WaypointFollow.MoveToPoint(Position, CurrentTarget.Position);
-            ThreadLifeObject.Health = 3;
         }
 
         

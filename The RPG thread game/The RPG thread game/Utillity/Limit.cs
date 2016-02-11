@@ -16,9 +16,17 @@
             MinLimit = minLimit;
         }
 
-        public bool IsWithinLimit(float value)
+        public float GetWithinLimit(float value)
         {
-            return value <= MaxLimit && value >= MinLimit;
+            if (value > MaxLimit)
+            {
+                return MaxLimit;
+            }
+            if (value < MinLimit)
+            {
+                return MinLimit;
+            }
+            return value;
         }
     }
 }

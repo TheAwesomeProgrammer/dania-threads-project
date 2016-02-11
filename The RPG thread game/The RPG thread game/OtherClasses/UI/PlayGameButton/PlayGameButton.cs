@@ -14,7 +14,7 @@ namespace The_RPG_thread_game
         private Graphics dc;
         private GameWorld gw;
 
-        public PlayGameButton(Vector2 position, SizeF sizeF, object mainMenuSender) : 
+        public PlayGameButton(Vector2 position, SizeF sizeF, MainMenu mainMenuSender) : 
             base(position, sizeF, mainMenuSender)
         {
             ButtonText = "Play Game";
@@ -28,11 +28,11 @@ namespace The_RPG_thread_game
             Form1.StartGameLoop();
         }
 
-        public override void Draw(Graphics graphics)
+        public override void Draw(Graphics dc)
         {
-            base.Draw(graphics);
+            base.Draw(dc);
 
-            graphics.DrawString(ButtonText, new Font(Font, FontSize), new SolidBrush(TextColor), TextPosition.X, TextPosition.Y);
+            dc.DrawString(ButtonText, new Font(Font, FontSize), new SolidBrush(TextColor), TextPosition.X, TextPosition.Y);
         }
     }
 }

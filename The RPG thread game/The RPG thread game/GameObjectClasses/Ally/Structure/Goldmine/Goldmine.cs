@@ -11,7 +11,8 @@ namespace The_RPG_thread_game
         public Goldmine(Vector2 startPos) :
             base(startPos)
         {
-
+            ScaleFactor = 0.5f;
+            ImagePath = @"Resources\Structures\Goldmine.png";
         }
     }
 }

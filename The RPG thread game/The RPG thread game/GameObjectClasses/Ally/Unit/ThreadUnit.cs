@@ -2,21 +2,19 @@
 
 namespace The_RPG_thread_game
 {
-    public abstract class ThreadUnit : Unit
+    public abstract class ThreadUnit : KillableSprite
     {
-        public ThreadLifeObject ThreadLifeObject;
+        public ThreadUpdating ThreadLifeObject;
 
         protected ThreadUnit(Vector2 startPos,Team team) :
                 base(startPos, team)
         {
-            ThreadLifeObject = new ThreadLifeObject(new LifeObject(this));
+            ThreadLifeObject = new ThreadUpdating(new LifeObject(this,HealthBarOffset));
         }
 
         public virtual void ThreadUpdateLoop(int threadId)
         {
             ThreadLifeObject.ThreadUpdater(threadId);
         }
-
-        
     }
 }

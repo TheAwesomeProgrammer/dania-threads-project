@@ -63,7 +63,6 @@
     <Compile Include="GameObjectClasses\Ally\Structure\Barracks\Barracks.cs" />
     <Compile Include="GameObjectClasses\Ally\Structure\Goldmine\Goldmine.cs" />
     <Compile Include="GameObjectClasses\Ally\Structure\Structure.cs" />
-    <Compile Include="GameObjectClasses\Ally\Structure\StructureCreator.cs" />
     <Compile Include="GameObjectClasses\Ally\Structure\Townhall\BigTownhall.cs" />
     <Compile Include="GameObjectClasses\Ally\Structure\Turret\Cannon\Cannon.cs" />
     <Compile Include="GameObjectClasses\Ally\Structure\Turret\LightningLauncher\LightningLauncher.cs" />
@@ -109,13 +108,21 @@
     <Compile Include="OtherClasses\GameWorld.cs" />
     <Compile Include="OtherClasses\Keyboard.cs" />
     <Compile Include="OtherClasses\MainMenu.cs" />
-    <Compile Include="OtherClasses\Mouse.cs" />
     <Compile Include="OtherClasses\ThreadManager.cs" />
     <Compile Include="OtherClasses\UI\About\AboutButton.cs" />
     <Compile Include="OtherClasses\UI\DragNDropButtons\DragNDropButton.cs" />
     <Compile Include="OtherClasses\UI\DragNDropButtons\BarrackDragNDropButton.cs" />
     <Compile Include="OtherClasses\UI\DragNDropButtons\FarmDragNDropButton.cs" />
+    <Compile Include="OtherClasses\UI\Mouse.cs" />
     <Compile Include="OtherClasses\UI\PlayGameButton\PlayGameButton.cs" />
+    <Compile Include="OtherClasses\UI\TownHall\Builder.cs" />
+    <Compile Include="OtherClasses\UI\TownHall\BuildWorkerButton.cs" />
+    <Compile Include="OtherClasses\UI\TownHall\Recruiter.cs" />
+    <Compile Include="OtherClasses\UI\TownHall\TownHallMain.cs" />
+    <Compile Include="OtherClasses\UI\TownHall\TownHallUpButton.cs" />
+    <Compile Include="OtherClasses\UI\TownHall\Unit.cs" />
+    <Compile Include="OtherClasses\UI\TownHall\Worker.cs" />
+    <Compile Include="OtherClasses\UI\TownHall\WorkerBuilder.cs" />
     <Compile Include="OtherClasses\UI\UIButton.cs" />
     <Compile Include="OtherClasses\UI\UIText.cs" />
     <Compile Include="OtherClasses\Vector2.cs" />
@@ -154,6 +161,21 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Resources\apple.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\bar.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Lvl1TownHall.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Lvl2TownHall.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Lvl3TownHall.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Lvl4TownHall.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Monsters\Warrior.png">
