@@ -59,7 +59,6 @@ namespace The_RPG_thread_game
                     Draw(Render.Graphics);
                     NextUpdateTime = 0;
                 }
-              
 
                 EndTime = DateTime.Now;
             }
@@ -67,10 +66,9 @@ namespace The_RPG_thread_game
 
         private void Setup()
         {
-            Counter.StartCounter(GetHashCode());
-            AddObjectInNextCycle(new BarrackDragNDropButton(new Vector2(50,100), new SizeF(50,50),this));
+            Counter.StartCounter(IDManager.Instance.GetID());
             AddObjectInNextCycle(new StructureMonsterSpawner());
-            AddObjectInNextCycle(new FarmDragNDropButton(new Vector2(50,150),new SizeF(50,50), this  ));
+            AddObjectInNextCycle(new BigTownhall(new Vector2(750,300)));
         }
 
         private void Update(double deltaTime)
@@ -126,9 +124,10 @@ namespace The_RPG_thread_game
             ObjectsToRemove.Add(objectToRemove);
         }
 
-        public static void AddObjectInNextCycle(GameObject objectToAdd)
+        public static GameObject AddObjectInNextCycle(GameObject objectToAdd)
         {
             ObjectsToAdd.Add(objectToAdd);
+            return objectToAdd;
         }
 
       

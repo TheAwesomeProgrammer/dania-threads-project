@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace The_RPG_thread_game.GameObjectClasses.ThreadObjects
         {
             SetThreadable();
             Counter = Counter.Instance;
-            Counter.StartCounter(GetHashCode());
+            Counter.StartCounter(GetObjectId());
         }
 
         public void ThreadUpdater(int threadId)
@@ -31,8 +32,9 @@ namespace The_RPG_thread_game.GameObjectClasses.ThreadObjects
 
         protected  void ThreadUpdate()
         {
-            double DeltaTime = (Counter.GetTimeGone(GetHashCode()));
-            Counter.StartCounter(GetHashCode());
+            double DeltaTime = Counter.GetTimeGone(GetObjectId());
+
+            Counter.StartCounter(GetObjectId());
             MyGameObject.Update(DeltaTime);
             MyGameObject.UpdateAnimation(DeltaTime);
         }

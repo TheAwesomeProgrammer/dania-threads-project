@@ -1,7 +1,8 @@
 ﻿using System;
 using The_RPG_thread_game.DragNDrop;
+using The_RPG_thread_game.Factories;
 
-namespace The_RPG_thread_game.GameObjectClasses.Ally.Unit.Monster
+namespace The_RPG_thread_game.GameObjectClasses.Factories
 {
     public class MonsterCreator : Creator
     {

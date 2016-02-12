@@ -35,7 +35,7 @@ namespace The_RPG_thread_game
             {
                 if (!thread.IsAlive)
                 {
-                    thread.StartAndRunInFront();
+                    thread.Start();
                 }
                 thread.Priority = threadPriority;
             }

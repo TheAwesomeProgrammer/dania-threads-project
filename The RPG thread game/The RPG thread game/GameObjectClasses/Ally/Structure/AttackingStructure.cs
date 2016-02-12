@@ -1,6 +1,8 @@
 ﻿using System.Drawing;
 using The_RPG_thread_game.DragNDrop;
+using The_RPG_thread_game.Factories;
 using The_RPG_thread_game.GameObjectClasses.Ally.Unit.Monster;
+using The_RPG_thread_game.GameObjectClasses.Factories;
 using The_RPG_thread_game.Utillity;
 
 namespace The_RPG_thread_game

@@ -1,6 +1,8 @@
-﻿using The_RPG_thread_game.GameObjectClasses.Ally.Unit.Monster;
+﻿using The_RPG_thread_game.Factories;
+using The_RPG_thread_game.GameObjectClasses.Ally.Unit.Monster;
+using The_RPG_thread_game.GameObjectClasses.Factories;
 
-namespace The_RPG_thread_game.DragNDrop
+namespace The_RPG_thread_game.Factories
 {
     public class MonsterObjectCreator : Factory
     {

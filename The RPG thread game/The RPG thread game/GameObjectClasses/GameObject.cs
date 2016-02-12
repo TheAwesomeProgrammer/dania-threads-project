@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using The_RPG_thread_game.GameObjectClasses.ThreadObjects;
+using The_RPG_thread_game.Utillity;
 
 namespace The_RPG_thread_game
 {
@@ -18,8 +21,11 @@ namespace The_RPG_thread_game
 
         protected bool IsFirstRun = true;
 
+        private int Id;
+
         public GameObject(Vector2 startPos)
         {
+            Id = IDManager.Instance.GetID();
             StartPos = startPos;
             Position = startPos;
         }
@@ -40,6 +46,11 @@ namespace The_RPG_thread_game
         protected virtual void Init()
         {
 
+        }
+
+        public  int GetObjectId()
+        {
+            return Id;
         }
 
 

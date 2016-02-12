@@ -1,11 +1,11 @@
 ﻿using System;
+using The_RPG_thread_game.DragNDrop;
+using The_RPG_thread_game.Factories;
 
-namespace The_RPG_thread_game.DragNDrop
+namespace The_RPG_thread_game.Factories
 {
     public class DropCreator : Creator
     {
-
-        public string ImagePath;
 
         public DropCreator(Enum anEnum, Factory factory) :
             base(anEnum, factory,new Vector2(0,0))

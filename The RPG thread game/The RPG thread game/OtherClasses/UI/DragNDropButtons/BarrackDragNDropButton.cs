@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using The_RPG_thread_game.DragNDrop;
+using The_RPG_thread_game.GameObjectClasses.Ally.Structure;
 
 namespace The_RPG_thread_game
 {
@@ -9,6 +10,7 @@ namespace The_RPG_thread_game
             base(position, sizeF, Sender)
         {
             DragEnum = StructureType.Barrack;
+            
         }
     }
 }

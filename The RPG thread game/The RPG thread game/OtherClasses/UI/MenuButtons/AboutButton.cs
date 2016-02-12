@@ -33,7 +33,7 @@ namespace The_RPG_thread_game
         {
             base.Draw(dc);
 
-            dc.DrawString(ButtonText, new Font(Font, FontSize), new SolidBrush(TextColor), TextPosition.X, TextPosition.Y);
+            
         }
     }
 }

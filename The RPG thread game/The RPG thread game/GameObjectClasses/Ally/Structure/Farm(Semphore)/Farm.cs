@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using The_RPG_thread_game.DragNDrop;
 using The_RPG_thread_game.Farm_Semphore_;
 
 namespace The_RPG_thread_game.GameObjectClasses.Ally.Structure
@@ -16,7 +17,7 @@ namespace The_RPG_thread_game.GameObjectClasses.Ally.Structure
         {
             SemaphoreLock = new Semaphore(StartFarmerCount, MaxFarmerCount);
             ScaleFactor = 0.5f;
-            ImagePath = @"Resources\Structures\Farm.png";
+            StructureType = StructureType.Farm;
         }
 
         public override void Enter()

@@ -48,19 +48,7 @@ namespace The_RPG_thread_game
             UpgradeFoodPrice += 15;
         }
 
-        public void UpgradingTownHall()
-        {
-            Form1.TryingToUpgradeTownHall = true;
 
-            if (ResourceManager.Gold > UpgradeGoldPrice && ResourceManager.Meat > UpgradeFoodPrice)
-            {
-                Form1.UseGold();
-            }
-            else
-            {
-                MessageBox.Show("Not enough resources.");
-            }
-        }
 
         public void Progress()
         {

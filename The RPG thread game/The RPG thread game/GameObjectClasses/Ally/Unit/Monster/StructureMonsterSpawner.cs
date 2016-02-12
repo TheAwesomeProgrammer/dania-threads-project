@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using The_RPG_thread_game.DragNDrop;
+using The_RPG_thread_game.Factories;
 using The_RPG_thread_game.GameObjectClasses.Ally.Structure;
 using The_RPG_thread_game.Utillity;
 

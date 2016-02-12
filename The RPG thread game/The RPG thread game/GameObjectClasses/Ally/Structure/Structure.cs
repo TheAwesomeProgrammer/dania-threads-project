@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using The_RPG_thread_game.DragNDrop;
+using The_RPG_thread_game.GameObjectClasses.Ally.Structure;
 
 namespace The_RPG_thread_game
 {
     public abstract class Structure : KillableSprite
     {
         public bool HasEntered = false;
+        public StructureType StructureType = StructureType.Townhall;
 
         protected int WaitingTimeInMilliSecounds = 200;
         
@@ -18,6 +20,13 @@ namespace The_RPG_thread_game
         public Structure(Vector2 startPos) : 
             base(startPos,Team.Ally)
         {
+           
+        }
+
+        protected override void Init()
+        {
+            ImagePath = @"Resources\Structures\" + StructureType + ".png";
+            base.Init();
         }
 
         public virtual void Enter()

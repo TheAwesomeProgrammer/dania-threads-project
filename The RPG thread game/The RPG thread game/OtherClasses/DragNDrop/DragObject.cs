@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using The_RPG_thread_game.Factories;
+using The_RPG_thread_game.GameObjectClasses.Ally.Structure;
 
 namespace The_RPG_thread_game.DragNDrop
 {
@@ -9,6 +11,7 @@ namespace The_RPG_thread_game.DragNDrop
     {
         private DropCreator DropCreator;
         private bool CanDrop;
+
 
         public DragObject(Vector2 startPos,string imagePath, DropCreator dropCreator) : 
             base(startPos, imagePath)
@@ -62,5 +65,6 @@ namespace The_RPG_thread_game.DragNDrop
             GameWorld.AddObjectInNextCycle(CreatedObject);
             Die();
         }
+
     }
 }

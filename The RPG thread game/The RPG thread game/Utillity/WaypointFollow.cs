@@ -24,7 +24,6 @@ namespace The_RPG_thread_game.Utillity
         public void MoveToPoint(Vector2 startPoint, Vector2 endPoint)
         {
             StartPoint = startPoint;
-            Counter.StartCounter(GetHashCode());
             TargetPoint = endPoint;
             Positions.Clear();
         }
@@ -38,7 +37,7 @@ namespace The_RPG_thread_game.Utillity
 
         private Vector2 GetDiretionToTarget()
         {
-            return (StartPoint.Substract(TargetPoint)).Normalized;
+            return (TargetPoint - StartPoint).Normalized;
         }
 
         public bool HasReachedTarget(Vector2 currentPosition)

@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factories\WorkerCreator.cs" />
+    <Compile Include="Factories\WorkerObjectCreator.cs" />
     <Compile Include="GameObjectClasses\Ally\Faction.cs" />
     <Compile Include="GameObjectClasses\Ally\KillableSprite.cs" />
     <Compile Include="GameObjectClasses\Ally\Structure\AttackingStructure.cs" />
@@ -72,16 +74,18 @@
     <Compile Include="GameObjectClasses\Ally\Unit\Infantry\Archer\Archer.cs" />
     <Compile Include="GameObjectClasses\Ally\Unit\Infantry\Infantry.cs" />
     <Compile Include="GameObjectClasses\Ally\Unit\Infantry\Swordsman\Swordsman.cs" />
-    <Compile Include="GameObjectClasses\Ally\Unit\Monster\MonsterCreator.cs" />
+    <Compile Include="Factories\MonsterCreator.cs" />
     <Compile Include="GameObjectClasses\Ally\Unit\Monster\StructureMonsterSpawner.cs" />
     <Compile Include="GameObjectClasses\Ally\Unit\Monster\MonsterType.cs" />
     <Compile Include="GameObjectClasses\Ally\Unit\Monster\NoMonster.cs" />
     <Compile Include="GameObjectClasses\Ally\Unit\Team.cs" />
     <Compile Include="GameObjectClasses\Ally\Unit\ThreadUnit.cs" />
     <Compile Include="GameObjectClasses\Ally\Unit\Unit.cs" />
+    <Compile Include="GameObjectClasses\Ally\Unit\Worker\EmptyWorker.cs" />
     <Compile Include="GameObjectClasses\Ally\Unit\Worker\Farmer\Farmer.cs" />
     <Compile Include="GameObjectClasses\Ally\Unit\Worker\Miner\Miner.cs" />
     <Compile Include="GameObjectClasses\Ally\Unit\Worker\Worker.cs" />
+    <Compile Include="GameObjectClasses\Ally\Unit\Worker\WorkerType.cs" />
     <Compile Include="GameObjectClasses\Bar\HealthBar.cs" />
     <Compile Include="GameObjectClasses\CollideableSprite.cs" />
     <Compile Include="GameObjectClasses\Ally\Unit\Monster\Monster.cs" />
@@ -93,16 +97,17 @@
     <Compile Include="GameObjectClasses\Sprite.cs" />
     <Compile Include="GameObjectClasses\ThreadObjects\GameObjectDecorator.cs" />
     <Compile Include="GameObjectClasses\ThreadObjects\Threadable.cs" />
+    <Compile Include="GameObjectClasses\ThreadObjects\ThreadLifeUpdating.cs" />
     <Compile Include="GameObjectClasses\ThreadObjects\ThreadUpdating.cs" />
     <Compile Include="Interfaces\Collideable.cs" />
     <Compile Include="Interfaces\Killable.cs" />
     <Compile Include="Interfaces\Upgradeable.cs" />
-    <Compile Include="OtherClasses\DragNDrop\Creator.cs" />
+    <Compile Include="Factories\Creator.cs" />
     <Compile Include="OtherClasses\DragNDrop\DragObject.cs" />
-    <Compile Include="OtherClasses\DragNDrop\Factory.cs" />
-    <Compile Include="OtherClasses\DragNDrop\DropCreator.cs" />
-    <Compile Include="GameObjectClasses\Ally\Unit\Monster\MonsterObjectCreator.cs" />
-    <Compile Include="GameObjectClasses\Ally\Structure\StructureObjectCreator.cs" />
+    <Compile Include="Factories\Factory.cs" />
+    <Compile Include="Factories\DropCreator.cs" />
+    <Compile Include="Factories\MonsterObjectCreator.cs" />
+    <Compile Include="Factories\StructureObjectCreator.cs" />
     <Compile Include="GameObjectClasses\Ally\Structure\StructureType.cs" />
     <Compile Include="OtherClasses\GameWorld.cs" />
     <Compile Include="OtherClasses\Keyboard.cs" />
@@ -111,20 +116,22 @@
     <Compile Include="OtherClasses\UI\DragNDropButtons\DragNDropButton.cs" />
     <Compile Include="OtherClasses\UI\DragNDropButtons\BarrackDragNDropButton.cs" />
     <Compile Include="OtherClasses\UI\DragNDropButtons\FarmDragNDropButton.cs" />
+    <Compile Include="OtherClasses\UI\DragNDropButtons\GoldMineDragNDrop.cs" />
     <Compile Include="OtherClasses\UI\MenuButtons\AboutButton.cs" />
     <Compile Include="OtherClasses\UI\MenuButtons\BackButton.cs" />
     <Compile Include="OtherClasses\UI\MenuButtons\CreditButton.cs" />
     <Compile Include="OtherClasses\UI\MenuButtons\ExitButton.cs" />
+    <Compile Include="OtherClasses\UI\MenuButtons\GameButtons\BuyFarner.cs" />
+    <Compile Include="OtherClasses\UI\MenuButtons\GameButtons\BuyMiner.cs" />
+    <Compile Include="OtherClasses\UI\MenuButtons\GameButtons\BuyStructuresButton.cs" />
+    <Compile Include="OtherClasses\UI\MenuButtons\GameButtons\BuyWorkerButton.cs" />
+    <Compile Include="OtherClasses\UI\MenuButtons\GameButtons\BuyWorkersButton.cs" />
+    <Compile Include="OtherClasses\UI\MenuButtons\GameButtons\StructureButton.cs" />
+    <Compile Include="OtherClasses\UI\MenuButtons\GameButtons\UpgradeButton.cs" />
     <Compile Include="OtherClasses\UI\MenuButtons\PlayGameButton.cs" />
     <Compile Include="OtherClasses\UI\Mouse.cs" />
-    <Compile Include="OtherClasses\UI\TownHall\Builder.cs" />
-    <Compile Include="OtherClasses\UI\TownHall\BuildWorkerButton.cs" />
     <Compile Include="OtherClasses\UI\TownHall\Recruiter.cs" />
     <Compile Include="OtherClasses\UI\TownHall\TownHallMain.cs" />
-    <Compile Include="OtherClasses\UI\TownHall\TownHallUpButton.cs" />
-    <Compile Include="OtherClasses\UI\TownHall\Unit.cs" />
-    <Compile Include="OtherClasses\UI\TownHall\Worker.cs" />
-    <Compile Include="OtherClasses\UI\TownHall\WorkerBuilder.cs" />
     <Compile Include="OtherClasses\UI\UIButton.cs" />
     <Compile Include="OtherClasses\UI\UIText.cs" />
     <Compile Include="OtherClasses\Vector2.cs" />
@@ -134,6 +141,7 @@
     <Compile Include="Utillity\Counter.cs" />
     <Compile Include="Utillity\Display.cs" />
     <Compile Include="Utillity\Extensions.cs" />
+    <Compile Include="Utillity\IDManager.cs" />
     <Compile Include="Utillity\Limit.cs" />
     <Compile Include="Utillity\Render.cs" />
     <Compile Include="Utillity\Time.cs" />
@@ -160,11 +168,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="OtherClasses\UI\MenuButtons\GameButtons\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\1GoldMine.png">
+    <Content Include="Resources\bgImage2.PNG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Structures\Goldmine.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\2GoldMine.png">
@@ -185,10 +194,7 @@
     <Content Include="Resources\bar.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\bgImage2.PNG">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Lvl1TownHall.png">
+    <Content Include="Resources\Structures\Townhall.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Lvl2TownHall.png">

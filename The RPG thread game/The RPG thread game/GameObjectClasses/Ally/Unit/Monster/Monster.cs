@@ -64,8 +64,13 @@ namespace The_RPG_thread_game
 
         public override void OnCollision(List<CollideableSprite> spritesCollidingWith)
         {
-            if (spritesCollidingWith.Exists(spriteCollidingWith => spriteCollidingWith is Unit &&
-                                                                   IsEnemy(spriteCollidingWith as Unit)))
+            if (spritesCollidingWith.Exists(item => item is Barracks))
+            {
+                Debug.WriteLine("GG");
+            }
+
+            if (spritesCollidingWith.Exists(spriteCollidingWith => spriteCollidingWith is KillableSprite &&
+                                                                   IsEnemy((Faction)spriteCollidingWith)))
             {
                 WaypointFollow.MoveToPoint(Position,EndPosition);
                 Moving = false;

@@ -1,6 +1,8 @@
-﻿using The_RPG_thread_game.GameObjectClasses.Ally.Structure;
+﻿using The_RPG_thread_game;
+using The_RPG_thread_game.Factories;
+using The_RPG_thread_game.GameObjectClasses.Ally.Structure;
 
-namespace The_RPG_thread_game.DragNDrop
+namespace The_RPG_thread_game.Factories
 {
     public class StructureObjectCreator : Factory
     {
@@ -17,6 +19,8 @@ namespace The_RPG_thread_game.DragNDrop
                     return new Barracks(DropCreator.StartPosition);
                 case StructureType.EnemyBarrack:
                     return new EnemyBarrack(DropCreator.StartPosition);
+                case StructureType.Goldmine:
+                    return new Goldmine(DropCreator.StartPosition);
 
 
                 default:

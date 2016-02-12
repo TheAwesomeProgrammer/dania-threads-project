@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using The_RPG_thread_game.DragNDrop;
+using The_RPG_thread_game.GameObjectClasses.Ally.Structure;
 using The_RPG_thread_game.GameObjectClasses.Ally.Unit.Monster;
 using The_RPG_thread_game.Utillity;
 
@@ -19,7 +20,7 @@ namespace The_RPG_thread_game
             AttackSpeed = float.MaxValue;
             NextTimeToAttack = AttackSpeed;
             ScaleFactor = 0.5f;
-            ImagePath = @"Resources\Structures\Barrack.png";
+            StructureType = StructureType.Barrack;
         }
 
         public void SpawnMonsterWarrior()

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 
 namespace The_RPG_thread_game
@@ -11,9 +12,13 @@ namespace The_RPG_thread_game
         protected float ScaleFactor;
         
         protected string ImagePath = @"Resources\apple.png";
-        protected Vector2 MyCenter = new Vector2(0,0);
 
-        protected Vector2 Center => MyCenter;
+        protected Vector2 MyCenter
+        {
+            get { return new Vector2(Position.X + SizeF.Width/2, Position.Y + SizeF.Height/2); }
+        }
+
+        public Vector2 Center => MyCenter;
 
         protected Sprite(Vector2 startPos) : 
             base(startPos)
@@ -41,7 +46,6 @@ namespace The_RPG_thread_game
         protected override void Init()
         {
             LoadImage();
-            MyCenter = new Vector2(Position.X + SizeF.Width / 2,Position.Y + SizeF.Height / 2);
         }
 
         protected virtual void LoadImage()

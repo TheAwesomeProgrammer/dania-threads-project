@@ -47,5 +47,12 @@ namespace The_RPG_thread_game.Utillity
         {
             return new Vector2(point.X,point.Y);
         }
+
+        public static Vector2 ToVector2(this SizeF sizeF)
+        {
+            return new Vector2(sizeF.Width, sizeF.Height);
+        }
+
+  
     }
 }

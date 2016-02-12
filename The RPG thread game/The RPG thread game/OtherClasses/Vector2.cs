@@ -35,18 +35,9 @@ namespace The_RPG_thread_game
             }
         }
 
-        public Vector2 Substract(Vector2 vec)
-        {
-            Vector2 newVec = new Vector2(x, y);
-            newVec.X = vec.X - this.x;
-            newVec.Y = vec.Y - this.y;
-
-            return newVec;
-        }
-
         public float DistanceToVector(Vector2 vector)
         {
-            Vector2 VectorsSubtracted = vector.Substract(this);
+            Vector2 VectorsSubtracted = vector - (this);
             return (float)Math.Sqrt(Math.Pow(VectorsSubtracted.x, 2) + Math.Pow(VectorsSubtracted.y, 2));
         }
 
@@ -54,16 +45,27 @@ namespace The_RPG_thread_game
         {
             return new Vector2(vector1.x * vector2.x,vector1.y * vector2.y);
         }
-
+      
         public static Vector2 operator *(Vector2 vector1, float value)
         {
             return new Vector2(vector1.x * value, vector1.y * value);
+        }
+
+        public static Vector2 operator /(Vector2 vector1, float value)
+        {
+            return new Vector2(vector1.x / value, vector1.y / value);
         }
 
         public static Vector2 operator +(Vector2 vector1, Vector2 vector2)
         {
             return new Vector2(vector1.x + vector2.x, vector1.y + vector2.y);
         }
+
+        public static Vector2 operator -(Vector2 vector1, Vector2 vector2)
+        {
+            return new Vector2(vector1.x - vector2.x, vector1.y - vector2.y);
+        }
+
 
         public PointF ToPointF()
         {

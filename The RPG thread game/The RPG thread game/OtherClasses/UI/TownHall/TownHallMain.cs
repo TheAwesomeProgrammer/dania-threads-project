@@ -21,9 +21,9 @@ namespace The_RPG_thread_game
         public int UpgradeProgess = 0;
 
         private bool ProgressNotHundred;
+        private bool UpgradeTownHall;
         private ResourceManager ResourceManager = ResourceManager.Instance;
         private Form1 Form1;
-        private TownHallUpButton TownHallUpButton;
         private int ProgressWaitTime = 100;
 
         public int CurrentUnits = 5;  
@@ -50,31 +50,14 @@ namespace The_RPG_thread_game
         }
 
 
-        public void UpgradingTownHall()
+        public bool CanUpgradeTownHall()
         {
-            Form1.TryingToUpgradeTownHall = true;
-
-            if (ResourceManager.Gold > UpgradeGoldPrice && ResourceManager.Meat > UpgradeFoodPrice)
-            {
-                Form1.UseGold();
-            }
-            else
-            {
-                MessageBox.Show("Not enough resources.");
-            }
+            return ResourceManager.Gold > UpgradeGoldPrice && ResourceManager.Meat > UpgradeFoodPrice;
         }
-        public void BuildingWorker()
+        public bool CanBuildWorker()
         {
-            Form1.TryingToBuildWOrker = true;
+            return ResourceManager.Gold > WorkerGoldPrice && ResourceManager.Meat > WorkerFoodPrice;
 
-            if (ResourceManager.Gold > WorkerGoldPrice && ResourceManager.Meat > WorkerFoodPrice)
-            {
-                Form1.UseGold();
-            }
-            else
-            {
-                MessageBox.Show("Not enough resources.");
-            }
         }
 
         public void ManageTownHallImages()
@@ -95,16 +78,32 @@ namespace The_RPG_thread_game
             }
         }
 
-        public void Progress()
+        public void BuildWorker(Worker workerToBuild)
         {
-            if (TownHallUpButton.buildingWorker)
+            ProgressWaitTime = 20;
+            Progress();
+            int WorkerThreadId = workerToBuild.GetObjectId();
+            ThreadManager.Instance.AddThread(new Thread(() => workerToBuild.ThreadUpdateLoop(WorkerThreadId)),
+                WorkerThreadId);
+
+
+
+        }
+
+        public void UpdateTownHall()
+        {
+            ProgressWaitTime = 100;
+            if (CanUpgradeTownHall())
             {
-                ProgressWaitTime = 20;
+                ResourceManager.Gold -= UpgradeGoldPrice;
+                ResourceManager.Meat -= UpgradeFoodPrice;
+                Progress();
             }
-            if (Form1.TryingToUpgradeTownHall)
-            {
-                ProgressWaitTime = 100;
-            }
+        }
+        
+
+        private void Progress()
+        {
             ProgressNotHundred = true;
             DateTime waitAbit;
             DateTime now = DateTime.Now;
@@ -120,17 +119,21 @@ namespace The_RPG_thread_game
                     Form1.Invalidate(); // Update onpaint
                     if (UpgradeProgess >= 100)
                     {
-                        ManageTownHallImages();
-                        UpgradeManager();
-                        UpgradeProgess = 0;
-                        CurrentLevel++;
+                        if (UpgradeTownHall)
+                        {
+                            ManageTownHallImages();
+                            UpgradeManager();
+                            UpgradeProgess = 0;
+                            CurrentLevel++;
+                            
+                        }
                         ProgressNotHundred = false;
-                        TownHallUpButton.buildingWorker = false;
-                        Form1.TryingToUpgradeTownHall = false;
                     }
                 }
             }
         }
+        
+
         public void UpgradeManager()
         {
             if (Form1.MSChosen)

@@ -15,7 +15,7 @@ namespace The_RPG_thread_game
         public bool IsEnemy(Faction faction)
         {
             return Team == Team.Enemy && faction.Team == Team.Ally ||
-                   Team == Team.Ally && faction.Team == Team.Enemy;
+            Team == Team.Ally && faction.Team == Team.Enemy;
         }
     }
 }

@@ -4,7 +4,7 @@
     {
         protected GameObject MyGameObject;
 
-        public GameObjectDecorator(GameObject gameObject) : 
+        public GameObjectDecorator(GameObject gameObject) :
             base(gameObject.Position)
         {
             MyGameObject = gameObject;
@@ -14,5 +14,6 @@
         {
             MyGameObject.IsThreadable = true;
         }
+
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace The_RPG_thread_game.DragNDrop
+﻿namespace The_RPG_thread_game.GameObjectClasses.Ally.Structure
 {
     public enum StructureType
     {

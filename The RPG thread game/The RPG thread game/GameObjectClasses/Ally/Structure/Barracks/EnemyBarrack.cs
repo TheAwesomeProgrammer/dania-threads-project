@@ -1,5 +1,8 @@
 ﻿using The_RPG_thread_game.DragNDrop;
+using The_RPG_thread_game.Factories;
+using The_RPG_thread_game.GameObjectClasses.Ally.Structure;
 using The_RPG_thread_game.GameObjectClasses.Ally.Unit.Monster;
+using The_RPG_thread_game.GameObjectClasses.Factories;
 using The_RPG_thread_game.Utillity;
 
 namespace The_RPG_thread_game
@@ -11,7 +14,7 @@ namespace The_RPG_thread_game
         {
             AttackSpeed = 5;
             ScaleFactor = 0.5f;
-            ImagePath = @"Resources\Structures\Barrack.png";
+            StructureType = StructureType.Barrack;
         }
 
         protected override void Init()

@@ -17,7 +17,7 @@ namespace The_RPG_thread_game
         private Structure EndStructure;
         private WaypointFollow WaypointFollow;
         private Structure CurrentTarget;
-        private Counter Counter;
+        private bool JustEnteredStructure;
 
         public Worker(Vector2 startPos,Structure startStructure,Structure endStructure) : 
             base(startPos,Team.Ally)
@@ -27,15 +27,15 @@ namespace The_RPG_thread_game
             EndStructure = endStructure;
             CurrentTarget = EndStructure;
             WaypointFollow.MoveToPoint(Position, CurrentTarget.Position);
-        }
-
-        
+        }        
 
         public override void Update(double deltaTime)
         {
-            Counter.GetTimeGone(GetHashCode());
-
-            Counter.StartCounter(GetHashCode());
+            if (JustEnteredStructure)
+            {
+                deltaTime = 0;
+                JustEnteredStructure = false;
+            }
             base.Update(deltaTime);
             Move(deltaTime);
             ShouldChangeTarget();
@@ -53,6 +53,7 @@ namespace The_RPG_thread_game
             {
                 CurrentTarget.Enter();
                 SwitchTarget();
+                JustEnteredStructure = true;
             }
         }
 

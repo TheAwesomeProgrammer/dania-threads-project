@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using The_RPG_thread_game.OtherClasses.UI.MenuButtons;
 
 namespace The_RPG_thread_game
 {
@@ -36,7 +37,7 @@ namespace The_RPG_thread_game
         {
             base.Draw(dc);
 
-            dc.DrawString(ButtonText, new Font(Font, FontSize), new SolidBrush(TextColor), TextPosition.X, TextPosition.Y);
+            dc.DrawString(ButtonText, new Font(FontFamily, FontSize), new SolidBrush(TextColor), TextPosition.X, TextPosition.Y);
         }
     }
 }
