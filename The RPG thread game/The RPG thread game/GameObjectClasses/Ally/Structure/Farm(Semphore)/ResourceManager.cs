@@ -35,7 +35,11 @@ namespace The_RPG_thread_game.Farm_Semphore_
         private ResourceManager(){}
 
 
-       
+        public void Reset()
+        {
+            Meat = 100;
+            Gold = 500;
+        }
         
     }
 }

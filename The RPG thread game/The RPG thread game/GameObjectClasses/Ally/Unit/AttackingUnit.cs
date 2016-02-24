@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using The_RPG_thread_game.Utillity;
@@ -41,10 +42,10 @@ namespace The_RPG_thread_game
         private void AnyoneInsideAttackRange()
         {
             List<CollideableSprite> CollideableSprites = GameWorld.ColliableSprites;
-            List<Unit> UnitsInsideAttackRange = CollideableSprites.FindAll(
+            List<KillableSprite> UnitsInsideAttackRange = CollideableSprites.FindAll(
                 collideableSprite => collideableSprite.CollidingWith(CollisionBox) &&
-                                     collideableSprite is Unit &&
-                                     !collideableSprite.Equals(this)).Cast<Unit>().ToList();
+                                     collideableSprite is KillableSprite &&
+                                     !collideableSprite.Equals(this)).Cast<KillableSprite>().ToList();
                                      
             if (UnitsInsideAttackRange.Count > 0)
             {
@@ -58,12 +59,13 @@ namespace The_RPG_thread_game
             
         }
 
-        protected void Attack(Unit unitToAttack)
+        protected void Attack(KillableSprite killableSprite)
         {
-            if (IsEnemy(unitToAttack) && NextTimeToAttack <= Time.TimeSinceStart)
+            if (IsEnemy(killableSprite) && NextTimeToAttack <= Time.TimeSinceStart)
             {
-                unitToAttack.Health -= Damage;
-                NextTimeToAttack = (float)Time.TimeSinceStart + NextTimeToAttack;
+                killableSprite.Health -= Damage;
+                Debug.WriteLine("ATTACK "+Time.TimeSinceStart);
+                NextTimeToAttack = (float)Time.TimeSinceStart + AttackSpeed;
             }
         }
 

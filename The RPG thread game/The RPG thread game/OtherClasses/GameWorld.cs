@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using The_RPG_thread_game.DragNDrop;
+using The_RPG_thread_game.Farm_Semphore_;
 using The_RPG_thread_game.GameObjectClasses.Ally.Unit.Monster;
 using The_RPG_thread_game.GameObjectClasses.ThreadObjects;
 using The_RPG_thread_game.Utillity;
@@ -36,6 +37,7 @@ namespace The_RPG_thread_game
 
         public GameWorld(Graphics dc, Rectangle displayRect)
         {
+            ResourceManager.Instance.Reset();
             Render = new Render(dc,displayRect);
             Display.Instance.SetDisplayRectangle(displayRect);
             ThreadManager = ThreadManager.Instance;
@@ -67,8 +69,11 @@ namespace The_RPG_thread_game
         private void Setup()
         {
             Counter.StartCounter(IDManager.Instance.GetID());
+            AddObjectInNextCycle(new StaticSprite(new Vector2(0, 0), @"Resources\bgImage2.png", new SizeF(1280, 720)));
             AddObjectInNextCycle(new StructureMonsterSpawner());
-            AddObjectInNextCycle(new BigTownhall(new Vector2(750,300)));
+            AddObjectInNextCycle(new BigTownhall(new Vector2(850,300)));
+            AddObjectInNextCycle(new EnemyBigTownHall(new Vector2(150, 300)));
+            AddObjectInNextCycle(new WriteTextInfo(new Vector2(0,0)));
         }
 
         private void Update(double deltaTime)
@@ -117,8 +122,6 @@ namespace The_RPG_thread_game
             Sprites.DoActionOnItems(sprite => sprite.Draw(graphics));
         }
 
-
-
         public static void RemoveObjectInNextCycle(GameObject objectToRemove)
         {
             ObjectsToRemove.Add(objectToRemove);
@@ -128,6 +131,13 @@ namespace The_RPG_thread_game
         {
             ObjectsToAdd.Add(objectToAdd);
             return objectToAdd;
+        }
+
+        public static void RemoveAllObjects()
+        {
+            ObjectsToRemove.AddRange(Objects);
+            ObjectsToRemove.AddRange(Sprites);
+            ObjectsToRemove.AddRange(ColliableSprites);
         }
 
       

@@ -20,11 +20,11 @@ namespace The_RPG_thread_game.GameObjectClasses.Ally.Structure
             StructureType = StructureType.Farm;
         }
 
-        public override void Enter()
+        public override void Enter(Worker workerEntering)
         {
             SemaphoreLock.WaitOne(-1);
-            base.Enter();
-            ResourceManager.Instance.Meat += MeatPerFarmer;
+            base.Enter(workerEntering);
+            workerEntering.GiveResourceAction = () => ResourceManager.Instance.Meat += MeatPerFarmer;
             SemaphoreLock.Release();
         }
 

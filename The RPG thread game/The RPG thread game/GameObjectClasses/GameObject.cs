@@ -13,15 +13,19 @@ namespace The_RPG_thread_game
 {
     public abstract class GameObject
     {
-        public Vector2 Position;
-
+       
         public bool IsThreadable;
+        public bool IsDead;
 
         protected Vector2 StartPos;
 
         protected bool IsFirstRun = true;
 
         private int Id;
+
+        public Vector2 Position;
+    
+
 
         public GameObject(Vector2 startPos)
         {
@@ -57,6 +61,7 @@ namespace The_RPG_thread_game
         public virtual void Die()
         {
             GameWorld.RemoveObjectInNextCycle(this);
+            IsDead = true;
         }
 
 

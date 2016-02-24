@@ -2,6 +2,7 @@
 using System.Drawing;
 using The_RPG_thread_game.DragNDrop;
 using The_RPG_thread_game.Factories;
+using The_RPG_thread_game.Farm_Semphore_;
 using The_RPG_thread_game.GameObjectClasses.Ally.Structure;
 
 namespace The_RPG_thread_game
@@ -29,6 +30,7 @@ namespace The_RPG_thread_game
 
         public override void OnClick()
         {
+            
             SenderButton?.RemoveAllButtons();
             DropCreator DropCreator = new DropCreator(DragEnum, new StructureObjectCreator());
             GameObject DragObject = new DragObject(Mouse.Position, DragImagePath, DropCreator);

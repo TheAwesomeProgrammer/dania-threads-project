@@ -17,16 +17,11 @@ namespace The_RPG_thread_game
         public Barracks(Vector2 startPos) :
             base(startPos)
         {
-            AttackSpeed = float.MaxValue;
-            NextTimeToAttack = AttackSpeed;
+            AttackSpeed = 3;
             ScaleFactor = 0.5f;
             StructureType = StructureType.Barrack;
         }
 
-        public void SpawnMonsterWarrior()
-        {
-            SpawnMonster();
-        }
 
     }
 }

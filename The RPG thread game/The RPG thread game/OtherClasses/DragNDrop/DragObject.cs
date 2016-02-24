@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using The_RPG_thread_game.Factories;
+using The_RPG_thread_game.Farm_Semphore_;
 using The_RPG_thread_game.GameObjectClasses.Ally.Structure;
 
 namespace The_RPG_thread_game.DragNDrop
@@ -11,6 +12,8 @@ namespace The_RPG_thread_game.DragNDrop
     {
         private DropCreator DropCreator;
         private bool CanDrop;
+        protected int GoldCost = 100;
+        protected int MeatCost = 25;
 
 
         public DragObject(Vector2 startPos,string imagePath, DropCreator dropCreator) : 
@@ -60,6 +63,8 @@ namespace The_RPG_thread_game.DragNDrop
 
         public void Drop()
         {
+            ResourceManager.Instance.Meat -= MeatCost;
+            ResourceManager.Instance.Gold -= GoldCost;
             DropCreator.SetDropStats(Position);
             GameObject CreatedObject = DropCreator.CreateObject();
             GameWorld.AddObjectInNextCycle(CreatedObject);

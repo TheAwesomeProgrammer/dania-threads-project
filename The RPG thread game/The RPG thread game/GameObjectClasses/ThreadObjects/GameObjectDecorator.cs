@@ -15,5 +15,10 @@
             MyGameObject.IsThreadable = true;
         }
 
+        public virtual void UpdateGameObject(double deltaTime)
+        {
+            MyGameObject.Update(deltaTime);
+            MyGameObject.UpdateAnimation(deltaTime);
+        }
     }
 }

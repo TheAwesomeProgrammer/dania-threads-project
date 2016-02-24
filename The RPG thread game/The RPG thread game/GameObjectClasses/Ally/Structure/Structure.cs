@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using The_RPG_thread_game.DragNDrop;
+using The_RPG_thread_game.Farm_Semphore_;
 using The_RPG_thread_game.GameObjectClasses.Ally.Structure;
 
 namespace The_RPG_thread_game
@@ -23,13 +24,20 @@ namespace The_RPG_thread_game
            
         }
 
+        public Structure(Vector2 startPos,Team team) :
+            base(startPos, team)
+        {
+
+        }
+
         protected override void Init()
         {
+            
             ImagePath = @"Resources\Structures\" + StructureType + ".png";
             base.Init();
         }
 
-        public virtual void Enter()
+        public virtual void Enter(Worker workerEntering)
         {
             HasEntered = true;
             Thread.Sleep(WaitingTimeInMilliSecounds);

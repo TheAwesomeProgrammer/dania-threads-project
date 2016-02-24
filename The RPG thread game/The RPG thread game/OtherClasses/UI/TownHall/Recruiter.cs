@@ -9,7 +9,7 @@ using The_RPG_thread_game.Farm_Semphore_;
 
 namespace The_RPG_thread_game.OtherClasses.TownHall
 {
-    public class Recruiter
+    public class Recruiter : GameObject
     {
         // Først laver vi en semafor så der kan komme 5 ind, og inden i den lave en lock så kun 1 ka køre af gangen.
         private ResourceManager ResourceManager = ResourceManager.Instance;
@@ -18,6 +18,12 @@ namespace The_RPG_thread_game.OtherClasses.TownHall
         private static Semaphore BuildManager = new Semaphore(0,5);
         private static readonly object BuildManagerLock = new object();
         public int BuildTime = 1000;
+
+        public Recruiter() :
+            base(new Vector2(0,0))
+        {
+            
+        }
 
 
         public void BuildWorker(Worker workerToBuild)
@@ -29,8 +35,8 @@ namespace The_RPG_thread_game.OtherClasses.TownHall
 
             lock (BuildManagerLock)
             {
-                if (ResourceManager.Gold > TownHall.WorkerGoldPrice &&
-                    ResourceManager.Meat > TownHall.WorkerFoodPrice)
+                if (ResourceManager.Gold >= TownHall.WorkerGoldPrice &&
+                    ResourceManager.Meat >= TownHall.WorkerFoodPrice)
                 {
                     ResourceManager.Gold -= TownHall.WorkerGoldPrice;
                     ResourceManager.Meat -= TownHall.WorkerFoodPrice;

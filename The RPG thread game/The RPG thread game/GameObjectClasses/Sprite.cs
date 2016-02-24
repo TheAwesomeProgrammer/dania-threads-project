@@ -38,6 +38,13 @@ namespace The_RPG_thread_game
             ImagePath = imagePath;
         }
 
+        protected Sprite(Vector2 startPos, string imagePath,SizeF sizeF) :
+            base(startPos)
+        {
+            ImagePath = imagePath;
+            SizeF = sizeF;
+        }
+
         private void SetStats(SizeF sizeF)
         {
             SizeF = sizeF;

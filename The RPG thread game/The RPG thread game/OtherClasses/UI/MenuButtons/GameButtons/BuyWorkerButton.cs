@@ -38,8 +38,8 @@ namespace The_RPG_thread_game
             WorkerCreator = new WorkerCreator(WorkerType, WorkerObjectCreator, Center, TownHall, EndStructure);
             if (EndStructure != null)
             {
-                Worker Worker = GameWorld.AddObjectInNextCycle(WorkerCreator.CreateObject()) as Worker;
-                Recruiter.BuildWorker(Worker);
+                Worker Worker = WorkerCreator.CreateObject() as Worker;
+                ThreadManager.Instance.AddThread(new Thread(() => Recruiter.BuildWorker(Worker)), Recruiter.GetObjectId()); 
             }
         }
 

@@ -66,14 +66,9 @@
     <Compile Include="GameObjectClasses\Ally\Structure\Goldmine\Goldmine.cs" />
     <Compile Include="GameObjectClasses\Ally\Structure\Structure.cs" />
     <Compile Include="GameObjectClasses\Ally\Structure\Townhall\BigTownhall.cs" />
-    <Compile Include="GameObjectClasses\Ally\Structure\Turret\Cannon\Cannon.cs" />
-    <Compile Include="GameObjectClasses\Ally\Structure\Turret\LightningLauncher\LightningLauncher.cs" />
-    <Compile Include="GameObjectClasses\Ally\Structure\Turret\Turret.cs" />
+    <Compile Include="GameObjectClasses\Ally\Structure\Townhall\EnemyBigTownHall.cs" />
     <Compile Include="GameObjectClasses\Ally\Unit\Factionable.cs" />
     <Compile Include="GameObjectClasses\Ally\Unit\AttackingUnit.cs" />
-    <Compile Include="GameObjectClasses\Ally\Unit\Infantry\Archer\Archer.cs" />
-    <Compile Include="GameObjectClasses\Ally\Unit\Infantry\Infantry.cs" />
-    <Compile Include="GameObjectClasses\Ally\Unit\Infantry\Swordsman\Swordsman.cs" />
     <Compile Include="Factories\MonsterCreator.cs" />
     <Compile Include="GameObjectClasses\Ally\Unit\Monster\StructureMonsterSpawner.cs" />
     <Compile Include="GameObjectClasses\Ally\Unit\Monster\MonsterType.cs" />
@@ -92,13 +87,15 @@
     <Compile Include="GameObjectClasses\Ally\Unit\Monster\MonsterArcher\MonsterArcher.cs" />
     <Compile Include="GameObjectClasses\Ally\Unit\Monster\MonsterWarrior\MonsterWarrior.cs" />
     <Compile Include="GameObjectClasses\GameObject.cs" />
-    <Compile Include="GameObjectClasses\LifeObject.cs" />
     <Compile Include="GameObjectClasses\NonCollidingSprite.cs" />
     <Compile Include="GameObjectClasses\Sprite.cs" />
+    <Compile Include="GameObjectClasses\StaticSprite.cs" />
+    <Compile Include="GameObjectClasses\StopGame.cs" />
     <Compile Include="GameObjectClasses\ThreadObjects\GameObjectDecorator.cs" />
     <Compile Include="GameObjectClasses\ThreadObjects\Threadable.cs" />
-    <Compile Include="GameObjectClasses\ThreadObjects\ThreadLifeUpdating.cs" />
     <Compile Include="GameObjectClasses\ThreadObjects\ThreadUpdating.cs" />
+    <Compile Include="GameObjectClasses\WinOrLoseGame.cs" />
+    <Compile Include="GameObjectClasses\WriteTextInfo.cs" />
     <Compile Include="Interfaces\Collideable.cs" />
     <Compile Include="Interfaces\Killable.cs" />
     <Compile Include="Interfaces\Upgradeable.cs" />
@@ -127,7 +124,6 @@
     <Compile Include="OtherClasses\UI\MenuButtons\GameButtons\BuyWorkerButton.cs" />
     <Compile Include="OtherClasses\UI\MenuButtons\GameButtons\BuyWorkersButton.cs" />
     <Compile Include="OtherClasses\UI\MenuButtons\GameButtons\StructureButton.cs" />
-    <Compile Include="OtherClasses\UI\MenuButtons\GameButtons\UpgradeButton.cs" />
     <Compile Include="OtherClasses\UI\MenuButtons\PlayGameButton.cs" />
     <Compile Include="OtherClasses\UI\Mouse.cs" />
     <Compile Include="OtherClasses\UI\TownHall\Recruiter.cs" />
@@ -171,6 +167,9 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Resources\bgImage2.PNG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Farmer.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Structures\Goldmine.png">

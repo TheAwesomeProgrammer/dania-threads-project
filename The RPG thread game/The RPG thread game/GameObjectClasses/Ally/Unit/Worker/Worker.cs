@@ -12,12 +12,14 @@ namespace The_RPG_thread_game
     public abstract class Worker : ThreadUnit
     {
         public float Speed = 100;
+        public Action GiveResourceAction;
         
         private Structure StartStructure;
         private Structure EndStructure;
         private WaypointFollow WaypointFollow;
         private Structure CurrentTarget;
         private bool JustEnteredStructure;
+        private bool HasResource;
 
         public Worker(Vector2 startPos,Structure startStructure,Structure endStructure) : 
             base(startPos,Team.Ally)
@@ -26,7 +28,7 @@ namespace The_RPG_thread_game
             StartStructure = startStructure;
             EndStructure = endStructure;
             CurrentTarget = EndStructure;
-            WaypointFollow.MoveToPoint(Position, CurrentTarget.Position);
+            WaypointFollow.MoveToPoint(Position, CurrentTarget.Center);
         }        
 
         public override void Update(double deltaTime)
@@ -51,7 +53,7 @@ namespace The_RPG_thread_game
         {
             if (WaypointFollow.HasReachedTarget(Position))
             {
-                CurrentTarget.Enter();
+                CurrentTarget.Enter(this);
                 SwitchTarget();
                 JustEnteredStructure = true;
             }
@@ -59,8 +61,12 @@ namespace The_RPG_thread_game
 
         private void SwitchTarget()
         {
+            if (EndStructure == null || EndStructure.IsDead)
+            {
+                Die();
+            }
             CurrentTarget = CurrentTarget == EndStructure ? StartStructure : EndStructure;
-            WaypointFollow.MoveToPoint(Position,CurrentTarget.Position);
+            WaypointFollow.MoveToPoint(Position,CurrentTarget.Center);
         }
     }
 }

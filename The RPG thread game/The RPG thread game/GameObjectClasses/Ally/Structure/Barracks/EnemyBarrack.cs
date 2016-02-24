@@ -12,7 +12,7 @@ namespace The_RPG_thread_game
         public EnemyBarrack(Vector2 startPos) :
             base(startPos)
         {
-            AttackSpeed = 5;
+            AttackSpeed = 2;
             ScaleFactor = 0.5f;
             StructureType = StructureType.Barrack;
         }

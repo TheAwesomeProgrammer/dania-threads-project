@@ -23,8 +23,6 @@ namespace The_RPG_thread_game
                 AddButton(GameWorld.AddObjectInNextCycle(new BuyStructuresButton(Position, ButtonsToSpawnSizeF, this)) as UIButton);
                 AddButton(GameWorld.AddObjectInNextCycle(new BuyWorkersButton(Position + new Vector2(0,
                     ButtonsToSpawnSizeF.Height + 10), ButtonsToSpawnSizeF, this)) as UIButton);
-                AddButton(GameWorld.AddObjectInNextCycle(new UpgradeButton(Position + new Vector2(0,
-                    (ButtonsToSpawnSizeF.Height * 2) + 20), ButtonsToSpawnSizeF, this)) as UIButton);
             }
         }
 

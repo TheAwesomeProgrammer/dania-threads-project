@@ -13,8 +13,10 @@ namespace The_RPG_thread_game
         public BigTownhall(Vector2 startPos) :
                 base(startPos)
         {
-            ScaleFactor = 0.5f;
+            ScaleFactor = 0.75f;
+            HealthLimit.SetMaxLimit(100);
             Health = 100;
+            
             StructureType = StructureType.Townhall;
         }
 
@@ -28,6 +30,22 @@ namespace The_RPG_thread_game
         {
             base.Update(deltaTime);
             Image = Form1.Self.TownHallImg;
+        }
+
+        public override void Die()
+        {
+            new WinOrLoseGame("You lose " + Environment.NewLine + " Press any key to continue");
+        }
+
+        public override void Enter(Worker workerEntering)
+        {
+            base.Enter(workerEntering);
+            if (workerEntering.GiveResourceAction != null)
+            {
+                workerEntering.GiveResourceAction();
+                workerEntering.GiveResourceAction = null;
+            }
+            
         }
     }
 }

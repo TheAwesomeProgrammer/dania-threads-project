@@ -85,9 +85,7 @@ namespace The_RPG_thread_game
             int WorkerThreadId = workerToBuild.GetObjectId();
             ThreadManager.Instance.AddThread(new Thread(() => workerToBuild.ThreadUpdateLoop(WorkerThreadId)),
                 WorkerThreadId);
-
-
-
+            GameWorld.AddObjectInNextCycle(workerToBuild);
         }
 
         public void UpdateTownHall()
@@ -116,7 +114,6 @@ namespace The_RPG_thread_game
                     UpgradeProgess++;
                     now = DateTime.Now;
                     waitAbit = now.AddMilliseconds(ProgressWaitTime);
-                    Form1.Invalidate(); // Update onpaint
                     if (UpgradeProgess >= 100)
                     {
                         if (UpgradeTownHall)

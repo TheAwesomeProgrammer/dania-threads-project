@@ -14,5 +14,11 @@ namespace The_RPG_thread_game
             base(startPos, sizeF)
         {
         }
+
+        protected NonCollidingSprite(Vector2 startPos, string imagePath, SizeF sizeF) :
+            base(startPos, imagePath, sizeF)
+        {
+
+        }
     }
 }

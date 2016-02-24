@@ -50,7 +50,7 @@ namespace Testing
 
         private void FarmThread(Farm farm)
         {
-            farm.Enter();
+            //farm.Enter();
         }
     }
 }

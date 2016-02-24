@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace The_RPG_thread_game
 {
-    internal class Keyboard
+    public class Keyboard
     {
         private enum KeyStates { None = 0, Down = 1, }
 
@@ -32,6 +32,18 @@ namespace The_RPG_thread_game
         public static bool IsKeyDown(Keys key)
         {
             return GetKeyState(key) == KeyStates.Down;
+        }
+
+        public static bool IsAnyKeyDown()
+        {
+            for (int KeyCodeNumber = 0; KeyCodeNumber < Enum.GetNames(typeof(Keys)).Length; KeyCodeNumber++)
+            {
+                if (IsKeyDown((Keys)KeyCodeNumber))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

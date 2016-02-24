@@ -1,38 +1,48 @@
 ﻿using System.Drawing;
 using The_RPG_thread_game.Bar;
+using The_RPG_thread_game.Utillity;
 
 namespace The_RPG_thread_game
 {
     public class KillableSprite : Faction
     {
-        protected LifeObject LifeObject;
         protected Vector2 HealthBarOffset = new Vector2(0, -50);
         protected HealthBar HealthBar;
+        protected int MaxHealth = 3;
+        protected int MyHealth = 3;
+
+        protected Limit HealthLimit;
 
         public int Health
         {
-            get { return LifeObject.Health; }
-            set { LifeObject.Health = value; }
+            get { return MyHealth; }
+            set { MyHealth = (int)HealthLimit.GetWithinLimit(value); }
         }
 
         public KillableSprite(Vector2 startPos, Team team) :
             base(startPos, team)
         {
-            LifeObject = new LifeObject(this);
-            HealthBar = new HealthBar(this,new SizeF(100,20), HealthBarOffset );
+            HealthLimit = new Limit(MaxHealth);
+        }
+
+        protected override void Init()
+        {
+            base.Init();
         }
 
         public override void Update(double deltaTime)
         {
             base.Update(deltaTime);
-            HealthBar.Update(deltaTime);
-            LifeObject.Update(deltaTime);
+            ShouldDie();
         }
 
-        public override void Draw(Graphics graphics)
+        private void ShouldDie()
         {
-            base.Draw(graphics);
-            HealthBar.Draw(graphics);
+            if (Health <= 0)
+            {
+                Die();
+            }
         }
+
     }
 }

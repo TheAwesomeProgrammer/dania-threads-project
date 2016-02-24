@@ -37,9 +37,8 @@ namespace The_RPG_thread_game
         public bool UCChosen;
         public static Form1 Self;
 
-        private static int GameLoopThreadId = 1;
-        private int MainMenuThreadId = 2;
-        private int TimeThreadId = 3;
+        private static int GameLoopThreadId = IDManager.Instance.GetID();
+        private int MainMenuThreadId = IDManager.Instance.GetID();
 
         private Thread TownHallUpgradeThread;
         private static Thread GameLoopThread;
@@ -53,9 +52,15 @@ namespace The_RPG_thread_game
         {
             InitializeComponent();
             Self = this;
+            Init();
         }
 
         private void Form1_Load(object sender, EventArgs e)
+        {
+           
+        }
+
+        public void Init()
         {
             if (dc == null)
                 dc = CreateGraphics();

@@ -28,5 +28,10 @@
             }
             return value;
         }
+
+        public void SetMaxLimit(float maxLimit)
+        {
+            MaxLimit = maxLimit;
+        }
     }
 }

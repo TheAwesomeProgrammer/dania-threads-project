@@ -35,8 +35,7 @@ namespace The_RPG_thread_game.GameObjectClasses.ThreadObjects
             double DeltaTime = Counter.GetTimeGone(GetObjectId());
 
             Counter.StartCounter(GetObjectId());
-            MyGameObject.Update(DeltaTime);
-            MyGameObject.UpdateAnimation(DeltaTime);
+            UpdateGameObject(DeltaTime);
         }
 
 

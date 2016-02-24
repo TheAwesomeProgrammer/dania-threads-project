@@ -52,7 +52,6 @@ namespace The_RPG_thread_game
             {
                 UIFunction();
                 DrawUI();
-                MouseActions();
             }
         }
 
@@ -84,30 +83,7 @@ namespace The_RPG_thread_game
             uiTextToRemove.Clear();
         }
 
-        private void MouseActions()
-        {
-            foreach (UIButton UIB in uiToDraw)
-            {
-                Vector2 MousePosition = Mouse.Position;
-
-                if (MousePosition.Y > UIB.Position.Y && MousePosition.Y < (UIB.Position.Y + UIB.SizeF.Height) &&
-                   MousePosition.X > UIB.Position.X && MousePosition.X < (UIB.Position.X + UIB.SizeF.Width))
-                {
-                    if (Mouse.IsMouseDown)
-                    {
-                        UIB.OnClick();
-                    }
-                    else
-                    {
-                        UIB.OnHover();
-                    }
-                }
-                else
-                {
-                    UIB.OnHoverExit();
-                }
-            }
-        }
+      
 
         private void DrawUI()
         {
@@ -117,6 +93,7 @@ namespace The_RPG_thread_game
             foreach (UIButton UIB in uiToDraw)
             {
                 UIB.Draw(dc);
+                UIB.Update(0);
             }
 
             foreach (UIText UIT in uiTextToWrite)

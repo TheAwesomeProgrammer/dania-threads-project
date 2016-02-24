@@ -9,9 +9,9 @@ namespace The_RPG_thread_game.GameObjectClasses.Ally.Unit.Monster
 {
     public class StructureMonsterSpawner : GameObject
     {
-        private float SpawnSpeed = 20;
-        private int SpeedIncreaseInterval = 10;
-        private int SpeedIncrease = 1;
+        private float MySpawnSpeed = 8;
+        private int SpeedIncreaseInterval = 5;
+        private int SpeedIncrease = 2;
         private int BottomOffset = 100;
 
         private float NextTimeToIncreaseSpeed = 10;
@@ -19,10 +19,18 @@ namespace The_RPG_thread_game.GameObjectClasses.Ally.Unit.Monster
 
         private Time Time;
         private Size DisplaySize;
+        private Limit SpeedLimit;
+
+        private float SpawnSpeed
+        {
+            get { return MySpawnSpeed; }
+            set { SpeedLimit.GetWithinLimit(value); }
+        }
 
         public StructureMonsterSpawner() :
             base(new Vector2(0,0))
         {
+            SpeedLimit = new Limit(MySpawnSpeed,1);
             Time = Time.Instance;
             DisplaySize = Display.Instance.GetSize();
         }
@@ -39,7 +47,7 @@ namespace The_RPG_thread_game.GameObjectClasses.Ally.Unit.Monster
             if (NextTimeToSpawn < Time.TimeSinceStart)
             {
                 Spawn();
-                NextTimeToSpawn = (float)Time.TimeSinceStart + SpawnSpeed;
+                NextTimeToSpawn = (float)Time.TimeSinceStart + MySpawnSpeed;
             }
         }
 
